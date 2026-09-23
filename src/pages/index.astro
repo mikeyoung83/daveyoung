@@ -1,0 +1,22 @@
+---
+// index.astro
+// Placeholder home page so the project builds and runs immediately after
+// clone. Replace the heading/subheading (and add real pages) once
+// STYLE-GUIDE.md is filled out for this site.
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import { siteConfig } from '../site-config';
+---
+
+<BaseLayout
+  {...siteConfig}
+  title="Home"
+  description="A short description of this page for search engines."
+>
+  <Hero
+    heading="Say what you do, in plain language"
+    subheading="One or two sentences of support copy that tell a visitor exactly what happens next."
+    primaryCta={{ label: 'Get in touch', href: '/contact' }}
+  />
+</BaseLayout>

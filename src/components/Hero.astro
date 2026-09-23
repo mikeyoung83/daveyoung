@@ -1,0 +1,66 @@
+---
+// Hero.astro
+// Deliberately flexible rather than fixed to one hero treatment — decide
+// per site whether it needs a visual, and where, based on STYLE-GUIDE.md's
+// imagery direction. Pass an <Image />/<Picture /> (from astro:assets) into
+// the "visual" slot when there's a real photo/illustration for this site;
+// omit it for a strong typographic-only hero.
+//
+// For a full-bleed background-image hero instead of this split layout,
+// daisyUI's `hero` / `hero-content` / `hero-overlay` classes are a better
+// fit than this component — that's a genuinely different treatment, not
+// a drop-in swap, so choose deliberately rather than defaulting to either.
+
+interface CTA {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  heading: string;
+  subheading?: string;
+  primaryCta?: CTA;
+  secondaryCta?: CTA;
+  align?: 'left' | 'center';
+}
+
+const { heading, subheading, primaryCta, secondaryCta, align = 'left' } = Astro.props;
+
+const hasVisual = Astro.slots.has('visual');
+
+const alignClasses =
+  align === 'center' ? 'items-center mx-auto text-center' : 'items-start text-left';
+---
+
+<section class="px-4 py-16 sm:py-24 lg:px-8">
+  <div class={`mx-auto max-w-6xl gap-10 ${hasVisual ? 'grid lg:grid-cols-2 lg:items-center' : ''}`}>
+    <div class={`flex max-w-2xl flex-col gap-6 ${alignClasses}`}>
+      <h1 class="text-balance font-heading text-4xl font-semibold leading-tight sm:text-5xl">
+        {heading}
+      </h1>
+
+      {subheading && <p class="max-w-prose text-lg text-base-content/70">{subheading}</p>}
+
+      {(primaryCta || secondaryCta) && (
+        <div class="mt-2 flex flex-wrap gap-3">
+          {primaryCta && (
+            <a href={primaryCta.href} class="btn btn-primary">
+              {primaryCta.label}
+            </a>
+          )}
+          {secondaryCta && (
+            <a href={secondaryCta.href} class="btn btn-ghost">
+              {secondaryCta.label}
+            </a>
+          )}
+        </div>
+      )}
+    </div>
+
+    {hasVisual && (
+      <div class="w-full">
+        <slot name="visual" />
+      </div>
+    )}
+  </div>
+</section>

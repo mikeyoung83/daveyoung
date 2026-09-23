@@ -1,0 +1,112 @@
+---
+// BaseLayout.astro
+// Wraps every page: document shell, fonts, Navbar, Footer.
+//
+// Site-wide values (siteName, navItems, cta, footer info) live in
+// src/site-config.ts and get spread in from each page:
+//
+//   ---
+//   import { siteConfig } from '../site-config';
+//   ---
+//   <BaseLayout {...siteConfig} title="Home" description="...">
+//
+// Fonts: astro.config.mjs defines two Astro Fonts API entries with
+// cssVariable set to `--font-heading-family` and `--font-body-family`
+// (not `--font-heading` / `--font-body` directly) — that avoids colliding
+// with the Tailwind theme tokens of the same shorter names defined in
+// global.css's @theme block, which reference these:
+//
+//   @theme {
+//     --font-heading: var(--font-heading-family), sans-serif;
+//     --font-sans: var(--font-body-family), sans-serif;
+//   }
+//
+// That gives you `font-heading` and `font-sans` Tailwind utilities without
+// a naming collision with Astro's generated font variables.
+
+import { Font } from 'astro:assets';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface NavItem {
+  label: string;
+  href: string;
+}
+
+interface CTA {
+  label: string;
+  href: string;
+}
+
+interface SocialLink {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  siteName: string;
+  navItems: NavItem[];
+  cta?: CTA;
+  tagline?: string;
+  address?: string;
+  email?: string;
+  phone?: string;
+  socialLinks?: SocialLink[];
+  lang?: string;
+}
+
+const {
+  title,
+  description,
+  siteName,
+  navItems,
+  cta,
+  tagline,
+  address,
+  email,
+  phone,
+  socialLinks,
+  lang = 'en',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="description" content={description} />
+    <title>{title} · {siteName}</title>
+
+    <Font cssVariable="--font-heading-family" preload />
+    <Font cssVariable="--font-body-family" preload />
+  </head>
+  <body class="flex min-h-screen flex-col font-sans">
+    <a
+      href="#main-content"
+      class="btn btn-primary sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50"
+    >
+      Skip to content
+    </a>
+
+    <Navbar siteName={siteName} navItems={navItems} cta={cta} />
+
+    <main id="main-content" class="flex-1">
+      <slot />
+    </main>
+
+    <Footer
+      siteName={siteName}
+      navItems={navItems}
+      tagline={tagline}
+      address={address}
+      email={email}
+      phone={phone}
+      socialLinks={socialLinks}
+    />
+  </body>
+</html>

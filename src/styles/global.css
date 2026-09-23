@@ -1,0 +1,41 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+/* Placeholder theme — replace these values using STYLE-GUIDE.md's color
+   palette section. Everything else in the codebase reads from these
+   tokens, so this block is most of what changes between sites. */
+@plugin "daisyui/theme" {
+  name: "brand";
+  default: true;
+  color-scheme: light;
+
+  --color-base-100: oklch(100% 0 0);
+  --color-base-200: oklch(97% 0 0);
+  --color-base-300: oklch(92% 0 0);
+  --color-base-content: oklch(20% 0 0);
+
+  --color-primary: oklch(55% 0.20 250);
+  --color-primary-content: oklch(98% 0.01 250);
+  --color-secondary: oklch(70% 0.15 200);
+  --color-secondary-content: oklch(98% 0.01 200);
+  --color-accent: oklch(65% 0.20 160);
+  --color-accent-content: oklch(98% 0.01 160);
+  --color-neutral: oklch(30% 0.02 250);
+  --color-neutral-content: oklch(98% 0 0);
+
+  --color-info: oklch(70% 0.20 220);
+  --color-success: oklch(65% 0.20 140);
+  --color-warning: oklch(80% 0.20 80);
+  --color-error: oklch(65% 0.25 25);
+
+  --radius-box: 1rem;
+  --radius-field: 0.5rem;
+  --radius-selector: 0.5rem;
+}
+
+/* Maps Astro's generated font variables (set in astro.config.mjs) onto
+   Tailwind v4 theme tokens, producing font-heading / font-sans utilities. */
+@theme {
+  --font-heading: var(--font-heading-family), sans-serif;
+  --font-sans: var(--font-body-family), sans-serif;
+}

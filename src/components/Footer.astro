@@ -1,0 +1,81 @@
+---
+// Footer.astro
+// Uses daisyUI's `footer` grid (stacked on mobile, columns from `sm` up)
+// plus a separate copyright strip below it. Section labels are sentence
+// case on purpose — no tracked-out all-caps eyebrow treatment.
+
+interface NavItem {
+  label: string;
+  href: string;
+}
+
+interface SocialLink {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  siteName: string;
+  navItems: NavItem[];
+  tagline?: string;
+  address?: string;
+  email?: string;
+  phone?: string;
+  socialLinks?: SocialLink[];
+}
+
+const { siteName, navItems, tagline, address, email, phone, socialLinks = [] } = Astro.props;
+
+const year = new Date().getFullYear();
+const telHref = (raw: string) => `tel:${raw.replace(/[^+\d]/g, '')}`;
+---
+
+<footer class="footer bg-neutral px-4 py-12 text-neutral-content sm:footer-horizontal sm:px-8">
+  <nav aria-label="Site">
+    <h6 class="footer-title">{siteName}</h6>
+    {tagline && <p class="max-w-xs text-neutral-content/70">{tagline}</p>}
+  </nav>
+
+  <nav aria-label="Footer">
+    <h6 class="footer-title">Pages</h6>
+    {navItems.map((item) => (
+      <a href={item.href} class="link link-hover">
+        {item.label}
+      </a>
+    ))}
+  </nav>
+
+  {(address || email || phone) && (
+    <nav aria-label="Contact">
+      <h6 class="footer-title">Contact</h6>
+      {address && <span class="text-neutral-content/80">{address}</span>}
+      {email && (
+        <a href={`mailto:${email}`} class="link link-hover">
+          {email}
+        </a>
+      )}
+      {phone && (
+        <a href={telHref(phone)} class="link link-hover">
+          {phone}
+        </a>
+      )}
+    </nav>
+  )}
+
+  {socialLinks.length > 0 && (
+    <nav aria-label="Social">
+      <h6 class="footer-title">Follow</h6>
+      {socialLinks.map((link) => (
+        <a href={link.href} class="link link-hover">
+          {link.label}
+        </a>
+      ))}
+    </nav>
+  )}
+</footer>
+
+<div class="border-t border-neutral-content/10 bg-neutral">
+  <div class="mx-auto max-w-6xl px-4 py-4 text-sm text-neutral-content/60 sm:px-8">
+    <p>© {year} {siteName}. All rights reserved.</p>
+  </div>
+</div>
