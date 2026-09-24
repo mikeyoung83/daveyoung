@@ -36,9 +36,10 @@ Warm clay/earth palette — theme `dyc-clay`.
 | `primary` | Clay/rust brown — CTAs, links, eyebrows, key accents | `oklch(48% 0.09 45)` |
 | `secondary` | Deep forest green — supporting color, used sparingly | `oklch(38% 0.06 150)` |
 | `accent` | Warm amber — icons, stars, eyebrows on dark backgrounds | `oklch(72% 0.15 70)` |
-| `neutral` | Dark espresso brown — footer, dark CTA bands, hero overlay | `oklch(24% 0.02 45)` |
+| `neutral` | Dark espresso brown — dark CTA band, hero overlay | `oklch(24% 0.02 45)` |
 | `base-100/200/300` | Warm cream, stepping slightly darker for alternating sections/borders | `oklch(97% 0.012 80)` / `oklch(94% 0.012 80)` / `oklch(90% 0.012 80)` |
 | `base-content` | Near-black warm brown text | `oklch(22% 0.02 45)` |
+| `granite` / `granite-deep` / `granite-content` | Cool slate blue-grey for the footer only (custom `@theme` tokens, not daisyUI roles) | `oklch(34% 0.018 250)` / `oklch(23% 0.014 250)` / `oklch(93% 0.006 250)` |
 | `info / success / warning / error` | Near-defaults, warmed slightly | see theme block |
 
 ```css
@@ -112,7 +113,7 @@ fonts: [
 - Density: spacious — sections use `py-16 sm:py-24`, content width `max-w-6xl`.
 - Borders: thin hairlines (`card-border`, `border-base-300`) between sections and on cards.
 - Shadows: soft, warm elevation — layered low-opacity shadows tinted with the brown text color, never grey. Cards rest with a faint shadow and lift slightly on hover; feature photos get a slightly deeper one. Tokens: `shadow-soft`, `shadow-lift`, `shadow-lift-lg` in `global.css`.
-- Texture & gradients (subtle): a faint topographic-contour texture (nod to the Peninsula/Escarpment) on dark bands and some light sections, via the `topo` utility — inline SVG mask, one small cached file, colored by `currentColor`. Gentle gradients only: the hero overlay darkens toward the text side, sections get a soft warm glow. The treatment should make the site feel richer without being pointable-at.
+- Texture & gradients (subtle): a faint topographic-contour texture (nod to the Peninsula/Escarpment) on the home dark CTA band and some light sections, via the `topo` utility — inline SVG mask, one small cached file, colored by `currentColor`. The footer instead gets a slate-grey gradient with a speckled granite texture (`granite` utility, SVG noise). Gentle gradients only: the hero overlay darkens toward the text side, sections get a soft warm glow. The treatment should make the site feel richer without being pointable-at.
 - Overall reference: a trusted local tradesperson — solid, warm, well-made; no flash.
 
 ---
@@ -161,11 +162,11 @@ Services are code-managed, not CMS-editable.
 
 ## 9. Components & patterns
 
-- **Navbar**: static, solid `base-100` with a hairline bottom border. Desktop: brand left, centered links, "Get a Quote" right. Mobile: brand left, hamburger right, opening a full-screen `<dialog>` menu with large heading-font links that slides down and fades in.
+- **Navbar**: static, solid `base-100` with a hairline bottom border. Active link is primary-colored text only — no pill background or shadow. Desktop: brand left, centered links, "Get a Quote" right. Mobile: brand left, hamburger right, opening a full-screen `<dialog>` menu with large heading-font links that slides down and fades in.
 - **Hero**: home uses a full-bleed photo (`<Picture>`, eager/high priority) under a dark neutral gradient overlay; left-aligned, eyebrow + oversized H1 + subhead + two CTAs. Interior pages open with a plain eyebrow + H1 section.
 - **Cards**: `card-border` on `base-100` with a soft warm shadow; linked cards lift on hover. Service cards inset the photo inside the card border.
 - **CTA buttons**: solid `btn-primary` for "Get a Quote" everywhere; `btn-outline` on dark backgrounds for secondary actions; `btn-neutral` uppercase for section-level links.
-- **Footer**: dark neutral band — brand + tagline, page links, contact info and socials when supplied, copyright strip. Interior pages get `FooterCta` (text + form) above it.
+- **Footer**: slate-grey gradient (`granite` → `granite-deep`) with a subtle granite texture — brand + tagline, page links, contact info and socials when supplied, copyright strip. Interior pages get `FooterCta` (text + form) above it.
 - **Forms**: Netlify Forms (`ContactForm.astro`), reused on Contact and in `FooterCta`.
 
 ---
