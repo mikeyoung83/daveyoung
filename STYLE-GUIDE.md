@@ -154,9 +154,18 @@ fonts: [
 
 | Section | What's editable | Content type |
 |---|---|---|
-| Projects | title, category, description, photo gallery (up to 8), completed date, featured flag | collection (`src/content/projects`, see `.pages.yml`) |
+| Projects | name\*, type of work\*, town, date finished\*, short description\*, photos\* (1–12, each with optional caption; first is the cover), show-on-homepage toggle, optional write-up | collection (`src/content/projects`, see `.pages.yml`) |
+
+\* required in the editor.
 
 Services are code-managed, not CMS-editable.
+
+**Editor is non-technical (Dave).** Keep it that way:
+- Every field has plain-language help text (`description`) with an example and where it appears on the site.
+- The raw config editor is hidden (`settings.hide`), renaming is off (a project's web address is set from its name at creation), and uploads are limited to JPG/PNG/WebP.
+- Content mistakes must never block a deploy: the Astro schema is lenient (`.catch` fallbacks), and `src/lib/projects.ts` skips an incomplete project, or leaves out a photo whose file is missing, with a `[projects] …` warning in the Netlify build log instead of failing the build. All pages read projects only through that helper.
+- Homepage/About "recent work" shows the 3 newest featured projects, falling back to the 3 newest if none are featured.
+- The three `example-*` projects (and `src/assets/media/example-*.jpg`) are demo content to delete once real projects exist.
 
 ---
 

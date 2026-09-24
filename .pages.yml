@@ -1,30 +1,123 @@
-media: src/assets/media
+# Pages CMS config (app.pagescms.org) — what Dave can edit without code.
+#
+# Keep in sync with the `projects` schema in src/content.config.ts by hand.
+# Help text is written for a non-technical editor: plain words, an example,
+# and where it shows up on the site.
+#
+# Safety net: every save commits to main and triggers a Netlify build. The
+# required/min/max rules below stop incomplete projects being saved, and
+# src/lib/projects.ts skips (rather than fails the build on) anything that
+# still slips through — so a content mistake can't block a deploy.
+
+settings:
+  # Hide the raw config editor so this file can't be changed from the CMS.
+  hide: true
+
+media:
+  input: src/assets/media
+  output: /media
+  # Only formats Astro's image optimizer handles. iPhone HEIC photos are
+  # refused at upload — Dave's phone can share them as JPG instead.
+  extensions: [jpg, jpeg, png, webp]
+  rename: safe
+
 content:
   - name: projects
     label: Projects
     type: collection
     path: src/content/projects
     format: yaml-frontmatter
+    # The file name (and the project's web address) comes from the title
+    # when the project is created, and never changes after that.
+    filename: '{primary}.md'
+    operations:
+      rename: false
+    view:
+      primary: title
+      fields: [title, category, completedDate, featured]
+      search: [title, location, description]
+      sort: [completedDate, title]
+      default:
+        sort: completedDate
+        order: desc
     fields:
       - name: title
+        label: Project name
         type: string
-      - name: category
-        type: select
+        required: true
+        description: A short name for the job, like "Cedar deck with pergola" or "Kitchen remodel". Shown as the heading on the project's page.
         options:
+          minlength: 3
+          maxlength: 70
+
+      - name: category
+        label: Type of work
+        type: select
+        required: true
+        description: Visitors can filter projects by this on the Projects page.
+        options:
+          placeholder: Choose one
           values:
             - Remodels & Renovations
             - Additions & Structural
             - Decks, Outdoor & Exteriors
-      - name: description
-        type: text
-      - name: gallery
-        type: image
+
+      - name: location
+        label: Town (optional)
+        type: string
+        description: Where the job was, like "Tobermory" or "Lion's Head". Leave blank to skip it.
         options:
-          multiple:
-            max: 8
-          extensions: [jpg, jpeg, png, webp]
+          maxlength: 40
+
       - name: completedDate
-        label: Completed date
+        label: Date finished
         type: date
+        required: true
+        description: Roughly when the job was completed. Projects are listed newest first.
+
+      - name: description
+        label: Short description
+        type: text
+        required: true
+        description: One or two sentences about what was built. Shown on the project's card and at the top of its page.
+        options:
+          minlength: 20
+          maxlength: 280
+
+      - name: photos
+        label: Photos
+        type: object
+        required: true
+        description: Add 1 to 12 photos. The first photo is the cover shown on project cards. Drag to reorder.
+        list:
+          min: 1
+          max: 12
+          collapsible:
+            collapsed: false
+            summary: 'Photo {index}: {caption}'
+        fields:
+          - name: image
+            label: Photo
+            type: image
+            required: true
+            description: JPG, PNG or WebP. Photos straight from your phone are fine; the website shrinks them automatically.
+          - name: caption
+            label: Caption (optional)
+            type: string
+            description: A few words about this photo, like "New deck stairs down to the lake". Also read aloud to visitors using screen readers.
+            options:
+              maxlength: 120
+
       - name: featured
+        label: Show on the homepage
         type: boolean
+        default: false
+        description: The homepage shows up to 3 projects with this switched on, newest first.
+
+      - name: body
+        label: Project write-up (optional)
+        type: rich-text
+        description: A longer story about the job, like the challenges, materials and what the owners wanted. Shown on the project's page below the photos. Leave blank to skip it.
+        options:
+          switcher: false
+          media: false

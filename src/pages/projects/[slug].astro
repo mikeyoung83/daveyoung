@@ -1,41 +1,79 @@
 ---
-import { getCollection, render } from 'astro:content';
+import { render } from 'astro:content';
+import { Image, getImage } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import FooterCta from '../../components/FooterCta.astro';
 import { siteConfig } from '../../site-config';
+import { getProjects, formatCompleted, type Project } from '../../lib/projects';
 
+// Only validated projects get a page — anything getProjects() skipped
+// (missing photos, name, etc.) simply isn't built.
 export async function getStaticPaths() {
-  const projects = await getCollection('projects');
+  const projects = await getProjects();
   return projects.map((project) => ({
-    params: { slug: project.id },
+    params: { slug: project.slug },
     props: { project },
   }));
 }
 
+interface Props {
+  project: Project;
+}
+
 const { project } = Astro.props;
-const { Content } = await render(project);
-const { title, category, description, gallery } = project.data;
+const { title, category, location, description, completedDate, photos } = project;
+const { Content } = await render(project.entry);
+const hasWriteUp = project.entry.body?.trim();
+const meta = [location, completedDate && `Completed ${formatCompleted(completedDate)}`].filter(Boolean);
+
+// Link previews use the cover photo, cropped to the 1200×630 Open Graph size.
+const ogImage = await getImage({ src: photos[0].src, width: 1200, height: 630, fit: 'cover', format: 'jpg' });
 ---
 
-<BaseLayout {...siteConfig} title={title} description={description}>
+<BaseLayout
+  {...siteConfig}
+  title={title}
+  description={description}
+  ogImage={new URL(ogImage.src, Astro.site).href}
+>
   <article class="bg-radial-[ellipse_at_top] from-primary/8 to-transparent to-70% px-4 py-16 sm:py-24 lg:px-8">
     <div class="mx-auto max-w-4xl">
       <a href="/projects" class="link link-hover text-sm text-base-content/60">&larr; All projects</a>
 
-      <span class="badge badge-outline badge-primary mt-4 w-fit">{category}</span>
+      <div class="mt-6">
+        <span class="badge badge-outline badge-primary">{category}</span>
+      </div>
       <h1 class="mt-2 font-heading text-4xl font-semibold leading-tight sm:text-5xl">{title}</h1>
+      {meta.length > 0 && <p class="mt-2 text-base-content/60">{meta.join(' · ')}</p>}
       <p class="mt-4 max-w-prose text-lg text-base-content/70">{description}</p>
 
       <div class="mt-10 grid gap-4 sm:grid-cols-2">
-        {gallery.map((src) => (
-          <img src={src} alt={title} loading="lazy" class="aspect-4/3 w-full rounded-box object-cover shadow-soft" />
+        {photos.map((photo, i) => (
+          <figure class={photos.length % 2 === 1 && i === 0 ? 'sm:col-span-2' : ''}>
+            <Image
+              src={photo.src}
+              alt={photo.alt}
+              widths={[480, 800, 1200, 1600]}
+              sizes={
+                photos.length % 2 === 1 && i === 0
+                  ? '(min-width: 896px) 864px, calc(100vw - 2rem)'
+                  : '(min-width: 896px) 424px, (min-width: 640px) 48vw, calc(100vw - 2rem)'
+              }
+              loading={i === 0 ? 'eager' : 'lazy'}
+              class="aspect-4/3 w-full rounded-box object-cover shadow-soft"
+            />
+            {photo.caption && (
+              <figcaption class="mt-2 text-sm text-base-content/60">{photo.caption}</figcaption>
+            )}
+          </figure>
         ))}
       </div>
 
-      <div class="mt-10 max-w-prose text-base-content/80">
-        <Content />
-      </div>
-
+      {hasWriteUp && (
+        <div class="mt-10 max-w-prose space-y-4 text-lg text-base-content/80">
+          <Content />
+        </div>
+      )}
     </div>
   </article>
 

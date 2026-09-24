@@ -29,12 +29,15 @@ licensed & insured, Bruce Peninsula). Bracketed `[...]` text and `TODO`
 comments mark content still needed from Dave: his story (About), a real
 testimonial (Services), contact details (`site-config.ts`), and real
 project photos/entries. Photos are Unsplash stand-ins; project galleries
-are picsum placeholders.
+are demo `example-*` entries using the stock photos.
 
 ## Special integrations / exceptions
 - Contact form uses Netlify Forms (`ContactForm.astro`).
-- Projects collection is editable via Pages CMS — see `.pages.yml`; keep it
-  in sync with `src/content.config.ts` by hand.
+- Projects collection is editable via Pages CMS by Dave (non-technical) —
+  see `.pages.yml`; keep it in sync with `src/content.config.ts` by hand.
+  Always read projects through `src/lib/projects.ts` (validates and skips
+  bad entries so CMS mistakes can't fail the build) — never `getCollection
+  ('projects')` directly in a page. Uploads land in `src/assets/media`.
 - `.npmrc` pins `legacy-peer-deps` for the Netlify build.
 - `site` in `astro.config.mjs` is still `https://example.com` — no domain yet.
 

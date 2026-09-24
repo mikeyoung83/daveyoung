@@ -1,13 +1,13 @@
 ---
-import { getCollection } from 'astro:content';
 import { Picture } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import Eyebrow from '../components/Eyebrow.astro';
 import { siteConfig } from '../site-config';
+import { getFeaturedProjects } from '../lib/projects';
 import heroSource from '../assets/hero/backyard-deck.jpg';
 
-const featuredProjects = (await getCollection('projects')).filter((p) => p.data.featured);
+const featuredProjects = await getFeaturedProjects();
 
 // Background photo: real deck build, sourced from Unsplash (free for
 // commercial use) as a stand-in until Dave supplies his own project
@@ -166,11 +166,13 @@ const featuredProjects = (await getCollection('projects')).filter((p) => p.data.
         <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {featuredProjects.map((project) => (
             <ProjectCard
-              slug={project.id}
-              title={project.data.title}
-              category={project.data.category}
-              description={project.data.description}
-              image={project.data.gallery[0]}
+              slug={project.slug}
+              title={project.title}
+              category={project.category}
+              description={project.description}
+              location={project.location}
+              image={project.photos[0].src}
+              imageAlt={project.photos[0].alt}
             />
           ))}
         </div>

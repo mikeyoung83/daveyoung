@@ -1,28 +1,42 @@
 ---
 // ProjectCard.astro
-// Renders one project entry from the `projects` content collection as a
-// gallery card. Gallery images are plain URLs for now (placeholder/stock
-// images, or future Pages CMS uploads) — see the comment in
-// content.config.ts for when to switch this to astro:assets <Image>.
+// Renders one project (from src/lib/projects.ts) as a gallery card: the
+// cover photo — the first photo Dave added in Pages CMS — optimized via
+// astro:assets, plus category, title, town, and short description.
+
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 
 interface Props {
   slug: string;
   title: string;
   category: string;
   description: string;
-  image: string;
+  location?: string;
+  image: ImageMetadata;
+  imageAlt: string;
 }
 
-const { slug, title, category, description, image } = Astro.props;
+const { slug, title, category, description, location, image, imageAlt } = Astro.props;
 ---
 
-<a href={`/projects/${slug}`} class="card card-border bg-base-100 shadow-soft transition duration-300 hover:shadow-lift motion-safe:hover:-translate-y-1">
+<a
+  href={`/projects/${slug}`}
+  class="card card-border bg-base-100 shadow-soft transition duration-300 hover:shadow-lift motion-safe:hover:-translate-y-1"
+>
   <figure>
-    <img src={image} alt={title} loading="lazy" class="aspect-4/3 w-full object-cover" />
+    <Image
+      src={image}
+      alt={imageAlt}
+      widths={[400, 700, 1000]}
+      sizes="(min-width: 1024px) 370px, (min-width: 640px) 45vw, calc(100vw - 2rem)"
+      class="aspect-4/3 w-full object-cover"
+    />
   </figure>
   <div class="card-body">
     <span class="badge badge-outline badge-primary w-fit">{category}</span>
     <h3 class="card-title font-heading">{title}</h3>
+    {location && <p class="-mt-1 grow-0 text-sm text-base-content/60">{location}</p>}
     <p class="text-base-content/70">{description}</p>
   </div>
 </a>
