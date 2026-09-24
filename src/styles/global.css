@@ -108,6 +108,6 @@
     z-index: -1;
     pointer-events: none;
     background: url('../assets/textures/granite.svg') 0 0 / 600px repeat;
-    opacity: var(--granite-opacity, 0.1);
+    opacity: var(--granite-opacity, 0.08);
   }
 }
