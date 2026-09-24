@@ -40,16 +40,17 @@ const fieldClass = 'input w-full border-2 border-base-content/25 bg-base-100 foc
     </div>
 
     <div class="flex flex-col items-start gap-1">
-      <label for="contact-message" class="label">Tell us about the job</label>
+      <label for="contact-message" class="label">Tell me about the job</label>
       <textarea
         id="contact-message"
         name="message"
         rows="5"
         required
+        placeholder="What you'd like done, and roughly where the property is"
         class={`textarea w-full border-2 border-base-content/25 bg-base-100 focus:border-primary`}
       ></textarea>
     </div>
 
-    <button type="submit" class="btn btn-accent btn-lg mt-2">Send</button>
+    <button type="submit" class="btn btn-accent btn-lg mt-2">Send Message</button>
   </fieldset>
 </form>

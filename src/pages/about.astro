@@ -1,11 +1,10 @@
 ---
 // about.astro
 // Layout inspired by inspiration/about.png (asymmetric intro, bare stat
-// numbers, captioned project strip, stacked service rows) — adapted to
+// numbers, captioned project strip, stacked process rows) — adapted to
 // our actual facts rather than the inspiration's numbers, which aren't
 // ours to reuse. See STYLE-GUIDE.md section 7.
 import { Image } from 'astro:assets';
-import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Eyebrow from '../components/Eyebrow.astro';
 import FooterCta from '../components/FooterCta.astro';
@@ -13,37 +12,58 @@ import { siteConfig } from '../site-config';
 import { getFeaturedProjects } from '../lib/projects';
 import deckPhoto from '../assets/about/deck-cottage.jpg';
 
-const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
 const featuredProjects = await getFeaturedProjects();
+
+// How a job runs, in order. One-off page copy, so it lives here rather
+// than in a collection.
+const steps = [
+  {
+    title: 'A free quote',
+    body: "I'll come out, look at the space and talk through what you want. Then you get a clear quote, at no cost.",
+  },
+  {
+    title: 'A plan you understand',
+    body: "Before any work starts, we'll agree on what's being built and what it costs, in plain language.",
+  },
+  {
+    title: 'Me, on site',
+    body: "I'm there for the work, so you always know who's on the job and who to call.",
+  },
+  {
+    title: 'Built right, the first time',
+    body: "Whether it's a full addition or a single deck rebuild, every job gets the same care.",
+  },
+];
 ---
 
 <BaseLayout
   {...siteConfig}
-  title="About"
-  description="Ten years of residential contracting on the Bruce Peninsula — licensed, insured, and local."
+  title="About Dave, Builder Since 2016"
+  description="I'm Dave Young, a Wiarton-based builder renovating homes and cottages across the Bruce Peninsula and Owen Sound since 2016. On site for every job."
 >
   <section class="bg-radial-[ellipse_at_top] from-primary/8 to-transparent to-70% px-4 py-16 sm:py-24 lg:px-8">
     <div class="mx-auto grid max-w-6xl gap-10 lg:grid-cols-2 lg:items-center">
       <div>
         <Eyebrow text="About" />
         <h1 class="font-heading text-4xl leading-tight font-bold sm:text-5xl">
-          Ten years on the Peninsula
+          Hi, I'm Dave.
         </h1>
 
         <div class="mt-6 max-w-prose space-y-4 text-lg text-base-content/80">
           <p>
-            Dave Young Contracting has been doing remodels, additions, and outdoor builds on the
-            Bruce Peninsula for 10 years.
+            I've been renovating homes and cottages on the Bruce Peninsula since 2016. I'm based in
+            Wiarton, and I'm on site for every job I take on, from kitchens and bathrooms to
+            additions and decks.
           </p>
           <p>
-            <!-- TODO: replace with Dave's real story/approach once supplied. -->
-            [Dave's story goes here — how he got started, his approach to a job, and what
-            homeowners can expect working with him.]
+            <!-- TODO: replace with Dave's own words once supplied. -->
+            [A few sentences in your own words: how you got into building, what you enjoy about
+            the work, and why you started your own business.]
           </p>
         </div>
 
         <div class="mt-8">
-          <a href="/contact" class="btn btn-primary">Get a Quote</a>
+          <a href="/contact" class="btn btn-primary">Get a Free Quote</a>
         </div>
       </div>
 
@@ -63,19 +83,19 @@ const featuredProjects = await getFeaturedProjects();
     <div class="mx-auto grid max-w-6xl gap-8 sm:grid-cols-2 lg:grid-cols-4">
       <div>
         <div class="font-heading text-5xl font-bold text-primary">10</div>
-        <p class="mt-1 text-base-content/70">Years in business</p>
+        <p class="mt-1 text-base-content/70">Years on the Peninsula</p>
       </div>
       <div>
         <div class="font-heading text-5xl font-bold text-primary">3</div>
-        <p class="mt-1 text-base-content/70">Specialties — remodels, additions, decks</p>
+        <p class="mt-1 text-base-content/70">Specialties: renovations, additions and decks</p>
       </div>
       <div>
-        <div class="font-heading text-2xl font-bold text-primary">Bruce Peninsula</div>
-        <p class="mt-1 text-base-content/70">Based in Wiarton, ON</p>
+        <div class="font-heading text-2xl font-bold text-primary">Based in Wiarton</div>
+        <p class="mt-1 text-base-content/70">Working from Owen Sound to Tobermory</p>
       </div>
       <div>
         <div class="font-heading text-2xl font-bold text-primary">Licensed & Insured</div>
-        <p class="mt-1 text-base-content/70">Every job, every time</p>
+        <p class="mt-1 text-base-content/70">Every job covered, start to finish</p>
       </div>
     </div>
   </section>
@@ -84,7 +104,7 @@ const featuredProjects = await getFeaturedProjects();
     <section class="px-4 py-16 sm:py-24 lg:px-8">
       <div class="mx-auto max-w-6xl">
         <Eyebrow text="Recent work" />
-        <h2 class="font-heading text-3xl font-semibold sm:text-4xl">A look at the work</h2>
+        <h2 class="font-heading text-3xl font-semibold sm:text-4xl">Some recent jobs</h2>
 
         <div class="mt-8 grid gap-6 sm:grid-cols-3">
           {featuredProjects.map((project) => (
@@ -115,17 +135,20 @@ const featuredProjects = await getFeaturedProjects();
 
   <section class="bg-base-200 px-4 py-16 sm:py-24 lg:px-8">
     <div class="mx-auto max-w-6xl">
-      <Eyebrow text="How we work" />
+      <Eyebrow text="How I work" />
       <h2 class="font-heading text-3xl font-semibold sm:text-4xl">What you can expect</h2>
 
-      <div class="mt-8 divide-y divide-base-300 border-y border-base-300">
-        {services.map((service) => (
-          <div class="grid gap-2 py-6 sm:grid-cols-[1fr_2fr] sm:gap-8">
-            <h3 class="font-heading text-xl font-semibold">{service.data.title}</h3>
-            <p class="text-base-content/70">{service.data.summary}</p>
-          </div>
+      <ol class="mt-8 divide-y divide-base-300 border-y border-base-300">
+        {steps.map((step, i) => (
+          <li class="grid gap-2 py-6 sm:grid-cols-[1fr_2fr] sm:gap-8">
+            <h3 class="flex items-baseline gap-3 font-heading text-xl font-semibold">
+              <span class="text-primary" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+              {step.title}
+            </h3>
+            <p class="text-base-content/70">{step.body}</p>
+          </li>
         ))}
-      </div>
+      </ol>
     </div>
   </section>
 

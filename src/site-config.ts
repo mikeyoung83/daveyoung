@@ -10,7 +10,7 @@
 //   <BaseLayout {...siteConfig} title="Home" description="...">
 
 export const siteConfig = {
-  siteName: 'Dave Young Contracting',
+  siteName: 'Dave Young Renovations',
   navItems: [
     { label: 'Home', href: '/' },
     { label: 'About', href: '/about' },
@@ -18,8 +18,10 @@ export const siteConfig = {
     { label: 'Projects', href: '/projects' },
     { label: 'Contact', href: '/contact' },
   ],
-  cta: { label: 'Get a Quote', href: '/contact' },
-  tagline: 'Residential remodels, additions & decks — Bruce Peninsula, ON.',
+  cta: { label: 'Get a Free Quote', href: '/contact' },
+  tagline: 'Renovations, additions and decks from Owen Sound to Tobermory. Licensed & insured since 2016.',
+  // Service area, named on the homepage (good for local search).
+  serviceTowns: ['Wiarton', 'Owen Sound', 'Sauble Beach', 'Southampton', "Lion's Head", 'Tobermory'],
   // TODO: real address/email/phone from Dave before launch.
   address: undefined as string | undefined,
   email: undefined as string | undefined,

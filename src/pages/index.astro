@@ -8,6 +8,7 @@ import { getFeaturedProjects } from '../lib/projects';
 import heroSource from '../assets/hero/backyard-deck.jpg';
 
 const featuredProjects = await getFeaturedProjects();
+const { serviceTowns } = siteConfig;
 
 // Background photo: real deck build, sourced from Unsplash (free for
 // commercial use) as a stand-in until Dave supplies his own project
@@ -16,8 +17,8 @@ const featuredProjects = await getFeaturedProjects();
 
 <BaseLayout
   {...siteConfig}
-  title="Home"
-  description="Residential remodels, additions, and decks on the Bruce Peninsula — 10 years local, licensed & insured."
+  title="Bruce Peninsula Renovations & Decks"
+  description="Kitchen and bath renovations, additions and decks from Owen Sound to Tobermory. I'm on site for every job. Licensed, insured, and quotes are free."
 >
   <div class="hero relative isolate min-h-[85vh]">
     {/* A real <picture> rather than a CSS background-image: the preload
@@ -43,23 +44,23 @@ const featuredProjects = await getFeaturedProjects();
       class="hero-overlay bg-neutral/75 sm:bg-transparent sm:bg-linear-to-r sm:from-neutral/90 sm:via-neutral/70 sm:to-neutral/35"
     ></div>
     <div class="hero-content w-full max-w-6xl flex-col items-start px-4 py-24 text-left lg:px-8">
-      <Eyebrow text="Bruce Peninsula, ON — Est. 2016" tone="accent" />
+      <Eyebrow text="Bruce Peninsula & Owen Sound · Since 2016" tone="accent" />
       <h1
         class="max-w-3xl text-balance font-heading text-5xl leading-none font-bold text-neutral-content sm:text-7xl lg:text-8xl"
       >
         Built right, the first time.
       </h1>
       <p class="mt-6 max-w-xl text-lg text-neutral-content/90 sm:text-xl">
-        Remodels, additions, and decks for homeowners on the Bruce Peninsula — 10 years local,
-        licensed and insured.
+        Kitchens, bathrooms, additions and decks, and I'm on site for every one. Licensed and
+        insured since 2016.
       </p>
       <div class="mt-8 flex flex-wrap gap-3">
-        <a href="/contact" class="btn btn-primary btn-lg">Get a Quote</a>
+        <a href="/contact" class="btn btn-primary btn-lg">Get a Free Quote</a>
         <a
           href="/projects"
           class="btn btn-outline btn-lg border-neutral-content/60 text-neutral-content hover:bg-neutral-content hover:text-neutral"
         >
-          View Projects
+          See My Work
         </a>
       </div>
     </div>
@@ -67,13 +68,13 @@ const featuredProjects = await getFeaturedProjects();
 
   <section class="topo bg-base-200 bg-radial-[ellipse_at_top] from-primary/8 to-transparent to-70% px-4 py-16 sm:py-24 lg:px-8">
     <div class="mx-auto max-w-4xl text-center">
-      <Eyebrow text="Why Dave Young Contracting" class="text-center" />
+      <Eyebrow text="Why homeowners call me" class="text-center" />
       <h2 class="font-heading text-4xl leading-tight font-bold sm:text-5xl">
-        A decade of work that speaks for itself.
+        One builder, start to finish.
       </h2>
       <p class="mt-4 text-lg text-base-content/70">
-        No subcontracted guesswork, no surprises — just straightforward contracting from someone
-        who's done it here for ten years.
+        When you hire me, you get me. I quote the job, I'm on site while it's built, and I'm the
+        one you call with questions. No hand-offs, and no wondering who's showing up.
       </p>
     </div>
 
@@ -87,13 +88,14 @@ const featuredProjects = await getFeaturedProjects();
             viewBox="0 0 24 24"
             stroke="currentColor"
             stroke-width="1.5"
+            aria-hidden="true"
           >
-            <rect x="3" y="4" width="18" height="18" rx="2"></rect>
-            <path stroke-linecap="round" d="M16 2v4M8 2v4M3 10h18" />
+            <circle cx="12" cy="8" r="4" />
+            <path stroke-linecap="round" d="M4 21a8 8 0 0 1 16 0" />
           </svg>
-          <h3 class="font-heading text-2xl font-semibold">10 Years Local</h3>
+          <h3 class="font-heading text-2xl font-semibold">On site for every job</h3>
           <p class="text-base-content/70">
-            Building and renovating homes on the Bruce Peninsula since 2016.
+            The person you hire is the person doing the work, from the first measurement to the final walk-through.
           </p>
         </div>
       </div>
@@ -107,17 +109,14 @@ const featuredProjects = await getFeaturedProjects();
             viewBox="0 0 24 24"
             stroke="currentColor"
             stroke-width="1.5"
+            aria-hidden="true"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M21 10c0 6.5-9 12-9 12s-9-5.5-9-12a9 9 0 0 1 18 0Z"
-            />
-            <circle cx="12" cy="10" r="3" />
+            <rect x="8" y="2" width="8" height="4" rx="1" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2M9 12h6M9 16h4" />
           </svg>
-          <h3 class="font-heading text-2xl font-semibold">Bruce Peninsula, ON</h3>
+          <h3 class="font-heading text-2xl font-semibold">Free quotes</h3>
           <p class="text-base-content/70">
-            Based in Wiarton, serving homeowners across the peninsula.
+            I'll look at the space, talk through what you want, and give you a clear quote at no cost.
           </p>
         </div>
       </div>
@@ -131,6 +130,7 @@ const featuredProjects = await getFeaturedProjects();
             viewBox="0 0 24 24"
             stroke="currentColor"
             stroke-width="1.5"
+            aria-hidden="true"
           >
             <path
               stroke-linecap="round"
@@ -139,14 +139,16 @@ const featuredProjects = await getFeaturedProjects();
             />
             <path stroke-linecap="round" stroke-linejoin="round" d="m9 12 2 2 4-4" />
           </svg>
-          <h3 class="font-heading text-2xl font-semibold">Licensed & Insured</h3>
-          <p class="text-base-content/70">Every project covered, start to finish.</p>
+          <h3 class="font-heading text-2xl font-semibold">Licensed & insured</h3>
+          <p class="text-base-content/70">
+            Every job is fully covered, start to finish, as it has been since 2016.
+          </p>
         </div>
       </div>
     </div>
 
     <div class="mt-12 text-center">
-      <a href="/services" class="btn btn-neutral tracking-wide uppercase">Our Services</a>
+      <a href="/services" class="btn btn-neutral tracking-wide uppercase">See What I Build</a>
     </div>
   </section>
 
@@ -180,16 +182,56 @@ const featuredProjects = await getFeaturedProjects();
     </section>
   )}
 
+  <section class="border-y border-base-300 bg-base-200 px-4 py-16 sm:py-24 lg:px-8">
+    <div class="mx-auto grid max-w-6xl gap-10 lg:grid-cols-2 lg:items-center">
+      <div>
+        <Eyebrow text="Where I work" />
+        <h2 class="font-heading text-3xl leading-tight font-semibold sm:text-4xl">
+          Homes and cottages across Grey-Bruce
+        </h2>
+        <p class="mt-4 max-w-prose text-lg text-base-content/80">
+          I'm based in Wiarton and work from Owen Sound up to Tobermory. Cottage projects are some
+          of my favourite work. If you're not up here full-time, I'll keep you updated while the
+          job gets done.
+        </p>
+      </div>
+
+      <ul class="flex flex-wrap gap-3" aria-label="Towns I work in">
+        {serviceTowns.map((town) => (
+          <li class="flex items-center gap-2 rounded-field border border-base-300 bg-base-100 px-4 py-2 font-heading text-lg font-semibold shadow-soft">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-4 w-4 text-primary"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M21 10c0 6.5-9 12-9 12s-9-5.5-9-12a9 9 0 0 1 18 0Z"
+              />
+              <circle cx="12" cy="10" r="3" />
+            </svg>
+            {town}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
   <section class="topo bg-neutral bg-radial-[ellipse_at_top_right] from-primary/30 to-transparent to-70% px-4 py-16 text-neutral-content [--topo-opacity:0.05] sm:py-24 lg:px-8">
     <div class="mx-auto flex max-w-4xl flex-col items-start gap-6">
-      <Eyebrow text="Let's talk" tone="accent" />
+      <Eyebrow text="Free quotes" tone="accent" />
       <h2 class="font-heading text-3xl font-semibold sm:text-4xl">
-        Ready to talk about your project?
+        Planning a project? Let's talk.
       </h2>
       <p class="max-w-prose text-lg text-neutral-content/80">
-        Tell us what you're planning and we'll get back to you with straight answers.
+        Tell me what you have in mind and I'll get back to you personally. Quotes are always free.
       </p>
-      <a href="/contact" class="btn btn-primary">Get a Quote</a>
+      <a href="/contact" class="btn btn-primary">Get a Free Quote</a>
     </div>
   </section>
 </BaseLayout>

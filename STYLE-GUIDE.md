@@ -1,4 +1,4 @@
-# Dave Young Contracting — Style Guide
+# Dave Young Renovations — Style Guide
 
 > The single source of truth for the site's design and content decisions;
 > `CLAUDE.md` just points here. Backfilled on 2026-09-24 from what was
@@ -11,7 +11,10 @@
 ## 1. Brand & voice
 
 **Who is this for?**
-- Business: Dave Young Contracting — residential remodels, additions, and decks, based in Wiarton, serving the Bruce Peninsula, ON since 2016. Licensed & insured.
+- Business: Dave Young Renovations (renamed from Dave Young Contracting, Sept 2026) — residential renovations, additions, and decks, based in Wiarton since 2016. Licensed & insured.
+- Service area: Wiarton (base), Owen Sound, Sauble Beach, Southampton, Lion's Head, Tobermory — "Owen Sound to Tobermory" / "Grey-Bruce". The town list lives in `site-config.ts` (`serviceTowns`).
+- Confirmed selling points (use only these — don't invent others): free quotes; Dave is on site for every job; he loves working with cottage owners and keeps away-from-home owners updated; licensed & insured since 2016.
+- **Never mention permits** anywhere on the site.
 - Audience: homeowners (and cottage owners) on the Bruce Peninsula planning a renovation, addition, or outdoor build, looking for someone local and reliable. **(confirm)**
 - Primary goal of the site: get a quote — every page funnels to the contact form.
 
@@ -19,7 +22,7 @@
 Straightforward, dependable, local, unpretentious, proud of the work.
 
 **Voice dos and don'ts**
-- Do: short, plain sentences; concrete claims (10 years, licensed & insured, Bruce Peninsula); address the reader as "you".
+- Do: first person as Dave ("I", "me" — never "we"/"our" for the business); short, plain sentences; concrete claims (since 2016, licensed & insured, free quotes, real town names); address the reader as "you". CTAs say "Get a Free Quote".
 - Don't: jargon, hype, exclamation points, "we're passionate about…" filler, invented testimonials or stats.
 
 **One line of example copy in this voice**

@@ -12,8 +12,8 @@ const projects = await getProjects();
 
 <BaseLayout
   {...siteConfig}
-  title="Projects"
-  description="Completed remodels, additions, and deck & exterior projects from Dave Young Contracting on the Bruce Peninsula."
+  title="Recent Renovation Projects"
+  description="Photos of finished renovations, additions and decks from around the Bruce Peninsula and Owen Sound. Filter by type of work, or browse them all."
 >
   <section class="bg-radial-[ellipse_at_top] from-primary/8 to-transparent to-70% px-4 py-16 sm:py-24 lg:px-8">
     <div class="mx-auto max-w-6xl">
@@ -23,8 +23,8 @@ const projects = await getProjects();
           See the work
         </h1>
         <p class="mt-4 max-w-prose text-lg text-base-content/70">
-          A look at finished work around the Bruce Peninsula. Filter by category, or browse it
-          all.
+          Finished renovations, additions and decks from around the Bruce Peninsula and Owen
+          Sound. Filter by type of work, or browse them all.
         </p>
       </div>
 
@@ -60,13 +60,13 @@ const projects = await getProjects();
           </div>
 
           <p id="project-empty" class="mt-8 text-base-content/70" hidden>
-            No projects in this category yet — check back soon, or
+            No projects of this type yet. Check back soon, or
             <button type="button" class="link link-primary" data-clear-filter>see all projects</button>.
           </p>
         </>
       ) : (
         <p class="mt-8 text-lg text-base-content/70">
-          Project photos are on their way — check back soon, or
+          Project photos are on their way. Check back soon, or
           <a href="/contact" class="link link-primary">get in touch</a> to talk about yours.
         </p>
       )}

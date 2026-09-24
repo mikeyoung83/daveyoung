@@ -1,4 +1,4 @@
-# Dave Young Contracting — project memory
+# Dave Young Renovations — project memory
 
 > This supplements `~/.claude/CLAUDE.md` (universal brochure-site rules,
 > lives outside this repo) with facts specific to *this* site. Keep it
@@ -8,12 +8,14 @@
 @STYLE-GUIDE.md
 
 ## What this site is
-Brochure site for Dave Young Contracting, a residential remodel/addition/
-deck contractor in Wiarton serving the Bruce Peninsula, ON. Aimed at local
-homeowners; the goal is quote requests.
+Brochure site for Dave Young Renovations (formerly Dave Young
+Contracting), a residential renovation/addition/deck builder in Wiarton
+serving the Bruce Peninsula and Owen Sound, ON. Aimed at local homeowners
+and cottage owners; the goal is quote requests. Copy is first person, as
+Dave.
 
 ## DaisyUI theme name in use
-`dyc-clay` — defined in `src/styles/global.css`. Full rationale for the
+`dyc-clay` (internal id kept from the old name — not visible anywhere) — defined in `src/styles/global.css`. Full rationale for the
 palette lives in `STYLE-GUIDE.md`.
 
 ## Pages
