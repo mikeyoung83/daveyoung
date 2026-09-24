@@ -177,6 +177,7 @@ Services are code-managed, not CMS-editable.
 - **CTA buttons**: solid `btn-primary` for "Get a Quote" everywhere; `btn-outline` on dark backgrounds for secondary actions; `btn-neutral` uppercase for section-level links.
 - **Footer**: slate-grey gradient (`granite` → `granite-deep`) with a subtle granite texture — brand + tagline, page links, contact info and socials when supplied, copyright strip. Interior pages get `FooterCta` (text + form) above it.
 - **Forms**: Netlify Forms (`ContactForm.astro`), reused on Contact and in `FooterCta`.
+- **Scroll reveal**: photo-led cards and standalone photos carry `data-reveal` and fade/slide up as they scroll into view (`src/scripts/reveal.ts`, ~0.7KB inline, no library). Anything on screen at load is never hidden, so it can't delay LCP. Never put `data-reveal` on the home hero.
 
 ---
 

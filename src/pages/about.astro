@@ -47,7 +47,7 @@ const featuredProjects = await getFeaturedProjects();
         </div>
       </div>
 
-      <div class="aspect-4/3 overflow-hidden rounded-box shadow-lift-lg">
+      <div class="aspect-4/3 overflow-hidden rounded-box shadow-lift-lg" data-reveal>
         <Image
           src={deckPhoto}
           alt="A finished wood deck on a home on the Bruce Peninsula"
@@ -88,7 +88,7 @@ const featuredProjects = await getFeaturedProjects();
 
         <div class="mt-8 grid gap-6 sm:grid-cols-3">
           {featuredProjects.map((project) => (
-            <a href={`/projects/${project.slug}`} class="group block">
+            <a href={`/projects/${project.slug}`} class="group block" data-reveal>
               <div class="aspect-4/3 overflow-hidden rounded-box shadow-soft transition-shadow duration-300 group-hover:shadow-lift">
                 <Image
                   src={project.photos[0].src}
