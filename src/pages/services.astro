@@ -107,6 +107,8 @@ const IMAGE_BY_TITLE: Record<string, ImageMetadata> = {
         <Image
           src={testimonialImage}
           alt="A finished bathroom remodel"
+          widths={[480, 800, 1120]}
+          sizes="(min-width: 1024px) 560px, calc(100vw - 2rem)"
           class="h-full w-full object-cover"
         />
       </div>

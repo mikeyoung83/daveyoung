@@ -18,7 +18,13 @@ const { title, summary, image, href } = Astro.props;
 
 <div class="card card-border bg-base-100 p-4">
   <figure class="overflow-hidden rounded-field">
-    <Image src={image} alt={title} class="aspect-4/3 w-full object-cover" />
+    <Image
+      src={image}
+      alt={title}
+      widths={[400, 700, 1000]}
+      sizes="(min-width: 1024px) 350px, (min-width: 640px) 45vw, calc(100vw - 4rem)"
+      class="aspect-4/3 w-full object-cover"
+    />
   </figure>
   <div class="card-body px-0.5 pt-4 pb-0.5">
     <h3 class="card-title font-heading">{title}</h3>

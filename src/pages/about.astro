@@ -52,6 +52,8 @@ const featuredProjects = (await getCollection('projects'))
         <Image
           src={deckPhoto}
           alt="A finished wood deck on a home on the Bruce Peninsula"
+          widths={[480, 800, 1120]}
+          sizes="(min-width: 1024px) 560px, calc(100vw - 2rem)"
           class="h-full w-full object-cover"
         />
       </div>

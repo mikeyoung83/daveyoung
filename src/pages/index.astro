@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import { getImage } from 'astro:assets';
+import { Picture } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import Eyebrow from '../components/Eyebrow.astro';
@@ -12,7 +12,6 @@ const featuredProjects = (await getCollection('projects')).filter((p) => p.data.
 // Background photo: real deck build, sourced from Unsplash (free for
 // commercial use) as a stand-in until Dave supplies his own project
 // photography — see CLAUDE.md's status section.
-const heroImage = await getImage({ src: heroSource, width: 2400, format: 'webp', quality: 80 });
 ---
 
 <BaseLayout
@@ -20,10 +19,24 @@ const heroImage = await getImage({ src: heroSource, width: 2400, format: 'webp',
   title="Home"
   description="Residential remodels, additions, and decks on the Bruce Peninsula — 10 years local, licensed & insured."
 >
-  <div
-    class="hero min-h-[85vh]"
-    style={`background-image: url(${heroImage.src}); background-position: center;`}
-  >
+  <div class="hero relative isolate min-h-[85vh]">
+    {/* A real <picture> rather than a CSS background-image: the preload
+        scanner finds it immediately, and phones get a small WebP
+        instead of the 2400px original. It's the LCP element, so load it
+        eagerly at high priority. The 70% overlay hides compression, so
+        quality can sit lower than for an unobscured photo. */}
+    <Picture
+      src={heroSource}
+      alt=""
+      formats={['webp']}
+      widths={[640, 960, 1280, 1920, 2400]}
+      sizes="100vw"
+      quality={65}
+      loading="eager"
+      fetchpriority="high"
+      pictureAttributes={{ class: 'absolute inset-0 -z-10' }}
+      class="h-full w-full object-cover"
+    />
     <div class="hero-overlay bg-neutral/70"></div>
     <div class="hero-content w-full max-w-6xl flex-col items-start px-4 py-24 text-left lg:px-8">
       <Eyebrow text="Bruce Peninsula, ON — Est. 2016" class="text-accent" />
