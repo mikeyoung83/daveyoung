@@ -109,7 +109,10 @@ const openGraph = ogImage
 
     <Navbar siteName={siteName} navItems={navItems} cta={cta} />
 
-    <main id="main-content" class="flex-1">
+    {/* flex column so a short page's last section can take flex-1 and
+        stretch to the footer — its background/texture then fills the
+        leftover space instead of stopping short (see contact.astro). */}
+    <main id="main-content" class="flex flex-1 flex-col">
       <slot />
     </main>
 
