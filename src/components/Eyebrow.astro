@@ -6,12 +6,18 @@
 
 interface Props {
   text: string;
+  // Color as a prop rather than a passed-in text-* class: two text color
+  // utilities on one element resolve by stylesheet order, not markup
+  // order, so a `class="text-accent"` override silently lost to the
+  // default. Use "accent" on dark backgrounds, where primary lacks contrast.
+  tone?: 'primary' | 'accent';
   class?: string;
 }
 
-const { text, class: className = '' } = Astro.props;
+const { text, tone = 'primary', class: className = '' } = Astro.props;
+const toneClass = tone === 'accent' ? 'text-accent' : 'text-primary';
 ---
 
-<p class={`mb-2 text-sm font-semibold tracking-widest text-primary uppercase ${className}`}>
+<p class={`mb-2 text-sm font-semibold tracking-widest uppercase ${toneClass} ${className}`}>
   {text}
 </p>

@@ -14,7 +14,7 @@ const telHref = (raw: string) => `tel:${raw.replace(/[^+\d]/g, '')}`;
 const hasContactInfo = Boolean(address || phone || email);
 ---
 
-<section class="border-t border-base-300 bg-base-200 px-4 py-16 sm:py-24 lg:px-8">
+<section class="topo border-t border-base-300 bg-base-200 px-4 py-16 sm:py-24 lg:px-8">
   <div class="mx-auto grid max-w-6xl gap-12 lg:grid-cols-2 lg:items-start">
     <div>
       <Eyebrow text="Get in touch" />
@@ -86,7 +86,7 @@ const hasContactInfo = Boolean(address || phone || email);
       )}
     </div>
 
-    <div class="rounded-box border border-base-300 bg-base-100 p-6 sm:p-8">
+    <div class="rounded-box border border-base-300 bg-base-100 p-6 shadow-lift sm:p-8">
       <ContactForm />
     </div>
   </div>

@@ -35,7 +35,7 @@ const year = new Date().getFullYear();
 const telHref = (raw: string) => `tel:${raw.replace(/[^+\d]/g, '')}`;
 ---
 
-<footer class="bg-neutral px-4 py-12 text-neutral-content lg:px-8">
+<footer class="topo bg-neutral bg-radial-[ellipse_at_top_right] from-primary/20 to-transparent to-70% px-4 py-12 text-neutral-content [--topo-opacity:0.045] lg:px-8">
   <div class="footer mx-auto max-w-6xl sm:footer-horizontal">
     <nav aria-label="Site">
       <h6 class="footer-title">{siteName}</h6>

@@ -37,9 +37,13 @@ const featuredProjects = (await getCollection('projects')).filter((p) => p.data.
       pictureAttributes={{ class: 'absolute inset-0 -z-10' }}
       class="h-full w-full object-cover"
     />
-    <div class="hero-overlay bg-neutral/70"></div>
+    {/* Darkest behind the left-aligned text, easing off to the right so
+        more of the photo shows. Flat on mobile, where text spans the width. */}
+    <div
+      class="hero-overlay bg-neutral/75 sm:bg-transparent sm:bg-linear-to-r sm:from-neutral/90 sm:via-neutral/70 sm:to-neutral/35"
+    ></div>
     <div class="hero-content w-full max-w-6xl flex-col items-start px-4 py-24 text-left lg:px-8">
-      <Eyebrow text="Bruce Peninsula, ON — Est. 2016" class="text-accent" />
+      <Eyebrow text="Bruce Peninsula, ON — Est. 2016" tone="accent" />
       <h1
         class="max-w-3xl text-balance font-heading text-5xl leading-none font-bold text-neutral-content sm:text-7xl lg:text-8xl"
       >
@@ -61,7 +65,7 @@ const featuredProjects = (await getCollection('projects')).filter((p) => p.data.
     </div>
   </div>
 
-  <section class="bg-base-200 px-4 py-16 sm:py-24 lg:px-8">
+  <section class="topo bg-base-200 bg-radial-[ellipse_at_top] from-primary/8 to-transparent to-70% px-4 py-16 sm:py-24 lg:px-8">
     <div class="mx-auto max-w-4xl text-center">
       <Eyebrow text="Why Dave Young Contracting" class="text-center" />
       <h2 class="font-heading text-4xl leading-tight font-bold sm:text-5xl">
@@ -74,11 +78,11 @@ const featuredProjects = (await getCollection('projects')).filter((p) => p.data.
     </div>
 
     <div class="mx-auto mt-12 grid max-w-6xl gap-6 sm:grid-cols-3">
-      <div class="card card-border bg-base-100">
+      <div class="card card-border bg-base-100 shadow-soft">
         <div class="card-body items-start gap-3 p-8">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="h-10 w-10 text-accent"
+            class="h-14 w-14 rounded-field bg-linear-to-br from-accent/25 to-primary/10 p-3 text-primary"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -94,11 +98,11 @@ const featuredProjects = (await getCollection('projects')).filter((p) => p.data.
         </div>
       </div>
 
-      <div class="card card-border bg-base-100">
+      <div class="card card-border bg-base-100 shadow-soft">
         <div class="card-body items-start gap-3 p-8">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="h-10 w-10 text-accent"
+            class="h-14 w-14 rounded-field bg-linear-to-br from-accent/25 to-primary/10 p-3 text-primary"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -118,11 +122,11 @@ const featuredProjects = (await getCollection('projects')).filter((p) => p.data.
         </div>
       </div>
 
-      <div class="card card-border bg-base-100">
+      <div class="card card-border bg-base-100 shadow-soft">
         <div class="card-body items-start gap-3 p-8">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="h-10 w-10 text-accent"
+            class="h-14 w-14 rounded-field bg-linear-to-br from-accent/25 to-primary/10 p-3 text-primary"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -174,9 +178,9 @@ const featuredProjects = (await getCollection('projects')).filter((p) => p.data.
     </section>
   )}
 
-  <section class="bg-neutral px-4 py-16 text-neutral-content sm:py-24 lg:px-8">
+  <section class="topo bg-neutral bg-radial-[ellipse_at_top_right] from-primary/30 to-transparent to-70% border-b border-neutral-content/10 px-4 py-16 text-neutral-content [--topo-opacity:0.05] sm:py-24 lg:px-8">
     <div class="mx-auto flex max-w-4xl flex-col items-start gap-6">
-      <Eyebrow text="Let's talk" class="text-accent" />
+      <Eyebrow text="Let's talk" tone="accent" />
       <h2 class="font-heading text-3xl font-semibold sm:text-4xl">
         Ready to talk about your project?
       </h2>

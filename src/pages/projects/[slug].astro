@@ -18,7 +18,7 @@ const { title, category, description, gallery } = project.data;
 ---
 
 <BaseLayout {...siteConfig} title={title} description={description}>
-  <article class="px-4 py-16 sm:py-24 lg:px-8">
+  <article class="bg-radial-[ellipse_at_top] from-primary/8 to-transparent to-70% px-4 py-16 sm:py-24 lg:px-8">
     <div class="mx-auto max-w-4xl">
       <a href="/projects" class="link link-hover text-sm text-base-content/60">&larr; All projects</a>
 
@@ -28,7 +28,7 @@ const { title, category, description, gallery } = project.data;
 
       <div class="mt-10 grid gap-4 sm:grid-cols-2">
         {gallery.map((src) => (
-          <img src={src} alt={title} loading="lazy" class="aspect-4/3 w-full rounded-box object-cover" />
+          <img src={src} alt={title} loading="lazy" class="aspect-4/3 w-full rounded-box object-cover shadow-soft" />
         ))}
       </div>
 

@@ -16,7 +16,7 @@ interface Props {
 const { slug, title, category, description, image } = Astro.props;
 ---
 
-<a href={`/projects/${slug}`} class="card card-border bg-base-100 transition-shadow hover:shadow-md">
+<a href={`/projects/${slug}`} class="card card-border bg-base-100 shadow-soft transition duration-300 hover:shadow-lift motion-safe:hover:-translate-y-1">
   <figure>
     <img src={image} alt={title} loading="lazy" class="aspect-4/3 w-full object-cover" />
   </figure>

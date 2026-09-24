@@ -1,130 +1,129 @@
-# [Site Name] — Style Guide
+# Dave Young Contracting — Style Guide
 
-> Fill this out — ideally as a conversation with Claude, not alone. This is
-> the single source of truth for the site's design and content decisions;
-> `CLAUDE.md` just points here. Fill placeholders in `[brackets]`. Delete
-> guidance text (in *italics*) as you go if you want a cleaner file, or
-> leave it — it doesn't hurt anything.
+> The single source of truth for the site's design and content decisions;
+> `CLAUDE.md` just points here. Backfilled on 2026-09-24 from what was
+> already built (the original filled-in copy was never committed). Items
+> marked **(confirm)** were inferred from the code rather than recorded
+> decisions — check them and delete the marker.
 
 ---
 
 ## 1. Brand & voice
 
-**Who is this for?** *(the business, and their audience)*
-- Business: [name, what they do, in one sentence]
-- Audience: [who's visiting this site, and what they need from it]
-- Primary goal of the site: [book a call / get a quote / show credibility / explain a service / drive to a store, etc.]
+**Who is this for?**
+- Business: Dave Young Contracting — residential remodels, additions, and decks, based in Wiarton, serving the Bruce Peninsula, ON since 2016. Licensed & insured.
+- Audience: homeowners (and cottage owners) on the Bruce Peninsula planning a renovation, addition, or outdoor build, looking for someone local and reliable. **(confirm)**
+- Primary goal of the site: get a quote — every page funnels to the contact form.
 
-**Personality** *(pick 3–5 adjectives that describe the brand, not the industry)*
-[e.g. warm, no-nonsense, precise, playful, established]
+**Personality**
+Straightforward, dependable, local, unpretentious, proud of the work.
 
 **Voice dos and don'ts**
-- Do: [e.g. short sentences, address the reader as "you," concrete claims]
-- Don't: [e.g. jargon, exclamation points, generic stock phrases like "we're passionate about..."]
+- Do: short, plain sentences; concrete claims (10 years, licensed & insured, Bruce Peninsula); address the reader as "you".
+- Don't: jargon, hype, exclamation points, "we're passionate about…" filler, invented testimonials or stats.
 
 **One line of example copy in this voice**
-[Write one real headline or sentence, in the target voice, as a calibration point.]
+"Built right, the first time."
 
 ---
 
 ## 2. Color palette
 
-*Think in terms of DaisyUI's semantic roles, not raw colors — this maps
-directly onto the theme block below.*
+Warm clay/earth palette — theme `dyc-clay`.
 
 | Role | Direction (plain language) | oklch value |
 |---|---|---|
-| `primary` | [main brand color — where it's used: CTAs, links, key accents] | `oklch(__% __ __)` |
-| `secondary` | [supporting color] | `oklch(__% __ __)` |
-| `accent` | [pop color for highlights, small accents] | `oklch(__% __ __)` |
-| `neutral` | [dark, used for footers/high-contrast blocks] | `oklch(__% __ __)` |
-| `base-100/200/300` | [background, light→slightly darker, for cards/sections] | `oklch(__% __ __)` each |
-| `base-content` | [default text color] | `oklch(__% __ __)` |
-| `info / success / warning / error` | [usually leave DaisyUI defaults unless brand-critical] | default or `oklch(__% __ __)` |
-
-**Ready-to-paste theme block** *(fill in the values above, then hand this whole block to Claude to drop into `src/styles/global.css`, replacing the placeholder theme already there)*
+| `primary` | Clay/rust brown — CTAs, links, eyebrows, key accents | `oklch(48% 0.09 45)` |
+| `secondary` | Deep forest green — supporting color, used sparingly | `oklch(38% 0.06 150)` |
+| `accent` | Warm amber — icons, stars, eyebrows on dark backgrounds | `oklch(72% 0.15 70)` |
+| `neutral` | Dark espresso brown — footer, dark CTA bands, hero overlay | `oklch(24% 0.02 45)` |
+| `base-100/200/300` | Warm cream, stepping slightly darker for alternating sections/borders | `oklch(97% 0.012 80)` / `oklch(94% 0.012 80)` / `oklch(90% 0.012 80)` |
+| `base-content` | Near-black warm brown text | `oklch(22% 0.02 45)` |
+| `info / success / warning / error` | Near-defaults, warmed slightly | see theme block |
 
 ```css
 @plugin "daisyui/theme" {
-  name: "[theme-name]";
+  name: "dyc-clay";
   default: true;
   color-scheme: light;
 
-  --color-base-100: oklch(__% __ __);
-  --color-base-200: oklch(__% __ __);
-  --color-base-300: oklch(__% __ __);
-  --color-base-content: oklch(__% __ __);
+  --color-base-100: oklch(97% 0.012 80);
+  --color-base-200: oklch(94% 0.012 80);
+  --color-base-300: oklch(90% 0.012 80);
+  --color-base-content: oklch(22% 0.02 45);
 
-  --color-primary: oklch(__% __ __);
-  --color-primary-content: oklch(__% __ __);
-  --color-secondary: oklch(__% __ __);
-  --color-secondary-content: oklch(__% __ __);
-  --color-accent: oklch(__% __ __);
-  --color-accent-content: oklch(__% __ __);
-  --color-neutral: oklch(__% __ __);
-  --color-neutral-content: oklch(__% __ __);
+  --color-primary: oklch(48% 0.09 45);
+  --color-primary-content: oklch(98% 0.01 80);
+  --color-secondary: oklch(38% 0.06 150);
+  --color-secondary-content: oklch(97% 0.01 80);
+  --color-accent: oklch(72% 0.15 70);
+  --color-accent-content: oklch(20% 0.02 45);
+  --color-neutral: oklch(24% 0.02 45);
+  --color-neutral-content: oklch(95% 0.01 80);
 
-  --color-info: oklch(__% __ __);
-  --color-success: oklch(__% __ __);
-  --color-warning: oklch(__% __ __);
-  --color-error: oklch(__% __ __);
+  --color-info: oklch(58% 0.1 230);
+  --color-success: oklch(56% 0.12 145);
+  --color-warning: oklch(75% 0.15 85);
+  --color-error: oklch(55% 0.18 25);
 
-  --radius-box: [e.g. 1rem — see shape section below];
-  --radius-field: [e.g. 0.5rem];
-  --radius-selector: [e.g. 0.5rem];
+  --radius-box: 0.5rem;
+  --radius-field: 0.375rem;
+  --radius-selector: 0.375rem;
 }
 ```
 
-*Tip: don't hand-pick oklch values blind — describe the palette in words to Claude ("deep forest green primary, warm cream background, terracotta accent") and let it propose values, or use daisyUI's theme generator (daisyui.com/theme-generator) and paste the export here.*
+Light theme only — daisyUI's built-in dark theme is deliberately disabled.
 
 ---
 
 ## 3. Typography
 
-- Heading font: [name] — via Google Fonts, weight(s) used: [e.g. 600, 700]
-- Body font: [name] — weight(s) used: [e.g. 400, 500]
-- Pairing feel: [e.g. "serif display heading against a clean sans body," or "single geometric sans throughout"]
+- Heading font: Barlow Condensed — via Google Fonts, weights 500, 600, 700
+- Body font: Inter — default weights
+- Pairing feel: tall, condensed, slightly industrial display headings against a clean neutral sans body.
 
-**Astro Fonts API config** *(fill in, hand to Claude for `astro.config.mjs` — replaces the placeholder Inter/Inter entries already there)*
 ```js
 fonts: [
   {
     provider: fontProviders.google(),
-    name: "[Heading Font Name]",
-    cssVariable: "--font-heading-family",
+    name: 'Barlow Condensed',
+    cssVariable: '--font-heading-family',
+    weights: [500, 600, 700],
   },
   {
     provider: fontProviders.google(),
-    name: "[Body Font Name]",
-    cssVariable: "--font-body-family",
+    name: 'Inter',
+    cssVariable: '--font-body-family',
   },
 ],
 ```
 
 **Type scale notes**
-- Headings: [e.g. tight tracking, bold, all-caps for eyebrows only]
-- Body: [e.g. generous line-height ~1.6, max line length ~65ch]
-- Any special treatment: [e.g. large display number stats, oversized H1 on hero]
+- Headings: bold/semibold, tight leading; oversized H1 on the home hero (up to `text-8xl`).
+- Eyebrows: small, uppercase, wide tracking, primary color — the only all-caps treatment (`Eyebrow.astro`).
+- Body: `text-lg` for intro copy, muted with `text-base-content/70`; `max-w-prose` line length.
+- Special treatment: large bare stat numbers on About (`text-5xl` heading font, primary color).
 
 ---
 
 ## 4. Shape & feel
 
-- Corner rounding: [sharp / subtle / very rounded] → sets `--radius-box`, `--radius-field`, `--radius-selector` above
-- Density: [spacious/airy vs compact]
-- Borders: [thin hairlines vs none vs bold outlines] → `--border` if customized
-- Shadows: [flat/no shadow vs soft elevation vs bold offset shadow]
-- Overall reference: [e.g. "feels like a boutique studio site," "feels like a regional law firm — trustworthy, low flash"]
+- Corner rounding: subtle — `0.5rem` boxes, `0.375rem` fields/selectors.
+- Density: spacious — sections use `py-16 sm:py-24`, content width `max-w-6xl`.
+- Borders: thin hairlines (`card-border`, `border-base-300`) between sections and on cards.
+- Shadows: soft, warm elevation — layered low-opacity shadows tinted with the brown text color, never grey. Cards rest with a faint shadow and lift slightly on hover; feature photos get a slightly deeper one. Tokens: `shadow-soft`, `shadow-lift`, `shadow-lift-lg` in `global.css`.
+- Texture & gradients (subtle): a faint topographic-contour texture (nod to the Peninsula/Escarpment) on dark bands and some light sections, via the `topo` utility — inline SVG mask, one small cached file, colored by `currentColor`. Gentle gradients only: the hero overlay darkens toward the text side, sections get a soft warm glow. The treatment should make the site feel richer without being pointable-at.
+- Overall reference: a trusted local tradesperson — solid, warm, well-made; no flash.
 
 ---
 
 ## 5. Imagery direction
 
-- Style: [candid photography / polished product shots / illustration / abstract gradients / no imagery, type-led]
-- Source: [client-provided photos / stock — which library / to be generated / placeholder for now]
-- Do: [e.g. natural light, real people, close crops]
-- Don't: [e.g. generic corporate handshake stock, busy backgrounds behind text]
-- Aspect ratios to standardize: [e.g. 16:9 for hero, 4:5 for team photos, 1:1 for logos]
+- Style: real residential project photography — decks, kitchens, bathrooms, framing.
+- Source: Unsplash stock stand-ins for now (`src/assets/`); Dave's own project photos to replace them before/after launch. Project gallery images are picsum placeholders until uploaded via Pages CMS.
+- Do: natural light, finished work, real materials, Bruce Peninsula / cottage-country settings.
+- Don't: generic corporate stock, people posing with tools, busy images behind text. **(confirm)**
+- Aspect ratios: full-bleed background on the home hero; 4:3 for cards, galleries, and feature photos.
 
 ---
 
@@ -132,49 +131,45 @@ fonts: [
 
 | Page | Purpose | Key sections |
 |---|---|---|
-| Home | [primary conversion goal] | [hero, value props, social proof, CTA...] |
-| About | [build trust/credibility] | [story, team, values...] |
-| Services | [explain offerings] | [service list, pricing if any, process...] |
-| Contact | [capture a lead] | [form, map/address, hours...] |
-| [+ any others] | | |
+| Home | Get a quote | Full-bleed photo hero with 2 CTAs, "why us" value cards, featured projects, dark CTA band |
+| About | Build trust | Intro + photo, stat strip, recent work strip, "what you can expect" service rows, footer CTA |
+| Services | Explain offerings | Photo-led service cards, "our approach", testimonial block (placeholder), footer CTA |
+| Projects | Show proof | Filterable project grid (by category), per-project detail pages with gallery |
+| Contact | Capture a lead | Netlify contact form |
 
 ---
 
 ## 7. Inspiration folder (optional)
 
-*Claude: always ask this explicitly while filling out the site map above. "Do you want to use a local inspiration folder for this site — screenshots of pages you like, dropped in as loose visual reference while building?" If no, do nothing — no folder, no automatic checking, and don't bring it up again unless the person does. It can always be turned on later mid-project; nothing here is a one-time decision. If yes: create `inspiration/` in the project root if it doesn't already exist (it's already covered by `.gitignore`, so this is safe regardless of the answer). Before building or substantially revising a page, check for files matching `inspiration/<page>-*.{jpg,jpeg,png,webp}` (e.g. `about-1.jpg`, `about-2.jpg`) — a bare `<page>.jpg` with no number also counts if that's all there is. If any exist, view them and treat them as loose reference for layout, hierarchy, and finesse only — never copy exact copy, logos, or brand assets from someone else's real site. If none exist for a page, build it from `STYLE-GUIDE.md` alone and say nothing about the missing folder.*
+**Using it?** Yes — `inspiration/` is local-only (gitignored). Pages so far were built from `about`, `services-1`, `services-2`, and `footer-cta` references.
 
-**Using it?** [Yes / No]
-
-**If yes, naming convention:** `inspiration/<page-name>-1.jpg`, `inspiration/<page-name>-2.jpg`, etc. — matching the page names in the site map above.
+**Naming convention:** `inspiration/<page-name>-1.jpg`, `inspiration/<page-name>-2.jpg`, etc. — matching the page names in the site map above.
 
 ---
 
 ## 8. CMS (optional)
 
-*Claude: always ask this explicitly while filling out the site map above — don't skip it and don't assume. "Will any part of this site need to be edited after launch without touching code — a Projects/Gallery page, blog, team roster, testimonials, pricing list? If so, which sections?" Most brochure sites don't need this. If the answer is no, leave this section as "Not needed" and do nothing further — no `.pages.yml`, no CMS setup, no mention of it elsewhere. If yes, use the `pagescms` skill (`~/.claude/skills/pagescms/`) to draft `.pages.yml` and the matching `src/content.config.ts` entry for each section named below.*
-
-**Needed?** [Yes / No]
-
-**If yes, which sections and what's editable in each:**
+**Needed?** Yes
 
 | Section | What's editable | Content type |
 |---|---|---|
-| [e.g. Projects] | [e.g. title, description, photo gallery, completion date] | [collection / file] |
+| Projects | title, category, description, photo gallery (up to 8), completed date, featured flag | collection (`src/content/projects`, see `.pages.yml`) |
+
+Services are code-managed, not CMS-editable.
 
 ---
 
 ## 9. Components & patterns
 
-- **Navbar**: [sticky vs static, transparent-over-hero vs solid, mobile menu style]
-- **Hero**: [text-only vs split with an image — see `src/components/Hero.astro`'s `visual` slot; headline + subhead + CTA count; alignment left vs center]
-- **Cards**: [used for: services/team/testimonials — border vs shadow vs flat]
-- **CTA buttons**: [primary style — solid `btn-primary`; when to use `btn-outline`/`btn-ghost`]
-- **Footer**: [what it contains beyond the defaults already in `Footer.astro` — nav links, contact info, social, legal]
-- **Forms**: [Netlify Forms vs other; field styling; validation/error states]
+- **Navbar**: static, solid `base-100` with a hairline bottom border. Desktop: brand left, centered links, "Get a Quote" right. Mobile: brand left, hamburger right, opening a full-screen `<dialog>` menu with large heading-font links that slides down and fades in.
+- **Hero**: home uses a full-bleed photo (`<Picture>`, eager/high priority) under a dark neutral gradient overlay; left-aligned, eyebrow + oversized H1 + subhead + two CTAs. Interior pages open with a plain eyebrow + H1 section.
+- **Cards**: `card-border` on `base-100` with a soft warm shadow; linked cards lift on hover. Service cards inset the photo inside the card border.
+- **CTA buttons**: solid `btn-primary` for "Get a Quote" everywhere; `btn-outline` on dark backgrounds for secondary actions; `btn-neutral` uppercase for section-level links.
+- **Footer**: dark neutral band — brand + tagline, page links, contact info and socials when supplied, copyright strip. Interior pages get `FooterCta` (text + form) above it.
+- **Forms**: Netlify Forms (`ContactForm.astro`), reused on Contact and in `FooterCta`.
 
 ---
 
 ## 10. Accessibility & performance notes
-*(anything beyond the global baseline in `~/.claude/CLAUDE.md` — most sites can leave this section as "no exceptions")*
-[e.g. specific contrast requirement, client accessibility mandate, target Lighthouse score]
+
+No exceptions to the global baseline. Performance matters (PageSpeed mobile is tracked): decoration is CSS/SVG only, the hero image must stay eager and unhidden (it's the LCP element), and nothing above the fold should start hidden for an animation.

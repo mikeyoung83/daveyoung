@@ -36,6 +36,10 @@
   --radius-box: 0.5rem;
   --radius-field: 0.375rem;
   --radius-selector: 0.375rem;
+
+  /* Subtle 3D on buttons/inputs: soft drop shadow + top inner highlight. */
+  --depth: 1;
+  --noise: 0;
 }
 
 /* Maps Astro's generated font variables (set in astro.config.mjs) onto
@@ -43,4 +47,40 @@
 @theme {
   --font-heading: var(--font-heading-family), sans-serif;
   --font-sans: var(--font-body-family), sans-serif;
+
+  /* Soft warm elevation (STYLE-GUIDE.md section 4): layered, low-opacity
+     shadows tinted with the warm brown text color instead of grey, so they
+     sit naturally on the cream backgrounds. shadow-soft = resting cards,
+     shadow-lift = hovered cards/panels, shadow-lift-lg = feature photos. */
+  --shadow-soft:
+    0 1px 2px color-mix(in oklab, var(--color-base-content) 6%, transparent),
+    0 4px 12px -2px color-mix(in oklab, var(--color-base-content) 8%, transparent);
+  --shadow-lift:
+    0 2px 4px color-mix(in oklab, var(--color-base-content) 6%, transparent),
+    0 12px 28px -6px color-mix(in oklab, var(--color-base-content) 16%, transparent);
+  --shadow-lift-lg:
+    0 4px 8px -2px color-mix(in oklab, var(--color-base-content) 8%, transparent),
+    0 28px 56px -16px color-mix(in oklab, var(--color-base-content) 28%, transparent);
+}
+
+/* Topographic contour texture — a nod to the Peninsula/Escarpment.
+   Drawn on a ::before layer behind the element's content, in
+   currentColor, so it automatically reads light-on-dark in neutral bands
+   and dark-on-light in cream sections. The SVG is a mask (alpha only):
+   one ~7KB gzipped file that tiles seamlessly and is cached site-wide.
+   Tune strength per section with e.g. [--topo-opacity:0.08]. */
+@utility topo {
+  position: relative;
+  isolation: isolate;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-color: currentColor;
+    opacity: var(--topo-opacity, 0.04);
+    mask: url('../assets/textures/topo.svg') 0 0 / 800px repeat;
+  }
 }
