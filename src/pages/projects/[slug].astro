@@ -1,0 +1,43 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FooterCta from '../../components/FooterCta.astro';
+import { siteConfig } from '../../site-config';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project) => ({
+    params: { slug: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+const { title, category, description, gallery } = project.data;
+---
+
+<BaseLayout {...siteConfig} title={title} description={description}>
+  <article class="px-4 py-16 sm:py-24 lg:px-8">
+    <div class="mx-auto max-w-4xl">
+      <a href="/projects" class="link link-hover text-sm text-base-content/60">&larr; All projects</a>
+
+      <span class="badge badge-outline badge-primary mt-4 w-fit">{category}</span>
+      <h1 class="mt-2 font-heading text-4xl font-semibold leading-tight sm:text-5xl">{title}</h1>
+      <p class="mt-4 max-w-prose text-lg text-base-content/70">{description}</p>
+
+      <div class="mt-10 grid gap-4 sm:grid-cols-2">
+        {gallery.map((src) => (
+          <img src={src} alt={title} loading="lazy" class="aspect-4/3 w-full rounded-box object-cover" />
+        ))}
+      </div>
+
+      <div class="mt-10 max-w-prose text-base-content/80">
+        <Content />
+      </div>
+
+    </div>
+  </article>
+
+  <FooterCta />
+</BaseLayout>

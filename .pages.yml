@@ -1,0 +1,30 @@
+media: src/assets/media
+content:
+  - name: projects
+    label: Projects
+    type: collection
+    path: src/content/projects
+    format: yaml-frontmatter
+    fields:
+      - name: title
+        type: string
+      - name: category
+        type: select
+        options:
+          values:
+            - Remodels & Renovations
+            - Additions & Structural
+            - Decks, Outdoor & Exteriors
+      - name: description
+        type: text
+      - name: gallery
+        type: image
+        options:
+          multiple:
+            max: 8
+          extensions: [jpg, jpeg, png, webp]
+      - name: completedDate
+        label: Completed date
+        type: date
+      - name: featured
+        type: boolean

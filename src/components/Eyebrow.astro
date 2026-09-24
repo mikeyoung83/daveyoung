@@ -1,0 +1,17 @@
+---
+// Eyebrow.astro
+// Small uppercase kicker label above a section heading — the "tight
+// tracking, uppercase for eyebrows only" treatment called for in
+// STYLE-GUIDE.md's typography section.
+
+interface Props {
+  text: string;
+  class?: string;
+}
+
+const { text, class: className = '' } = Astro.props;
+---
+
+<p class={`mb-2 text-sm font-semibold tracking-widest text-primary uppercase ${className}`}>
+  {text}
+</p>

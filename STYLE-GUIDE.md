@@ -140,7 +140,17 @@ fonts: [
 
 ---
 
-## 7. CMS (optional)
+## 7. Inspiration folder (optional)
+
+*Claude: always ask this explicitly while filling out the site map above. "Do you want to use a local inspiration folder for this site — screenshots of pages you like, dropped in as loose visual reference while building?" If no, do nothing — no folder, no automatic checking, and don't bring it up again unless the person does. It can always be turned on later mid-project; nothing here is a one-time decision. If yes: create `inspiration/` in the project root if it doesn't already exist (it's already covered by `.gitignore`, so this is safe regardless of the answer). Before building or substantially revising a page, check for files matching `inspiration/<page>-*.{jpg,jpeg,png,webp}` (e.g. `about-1.jpg`, `about-2.jpg`) — a bare `<page>.jpg` with no number also counts if that's all there is. If any exist, view them and treat them as loose reference for layout, hierarchy, and finesse only — never copy exact copy, logos, or brand assets from someone else's real site. If none exist for a page, build it from `STYLE-GUIDE.md` alone and say nothing about the missing folder.*
+
+**Using it?** [Yes / No]
+
+**If yes, naming convention:** `inspiration/<page-name>-1.jpg`, `inspiration/<page-name>-2.jpg`, etc. — matching the page names in the site map above.
+
+---
+
+## 8. CMS (optional)
 
 *Claude: always ask this explicitly while filling out the site map above — don't skip it and don't assume. "Will any part of this site need to be edited after launch without touching code — a Projects/Gallery page, blog, team roster, testimonials, pricing list? If so, which sections?" Most brochure sites don't need this. If the answer is no, leave this section as "Not needed" and do nothing further — no `.pages.yml`, no CMS setup, no mention of it elsewhere. If yes, use the `pagescms` skill (`~/.claude/skills/pagescms/`) to draft `.pages.yml` and the matching `src/content.config.ts` entry for each section named below.*
 
@@ -154,7 +164,7 @@ fonts: [
 
 ---
 
-## 8. Components & patterns
+## 9. Components & patterns
 
 - **Navbar**: [sticky vs static, transparent-over-hero vs solid, mobile menu style]
 - **Hero**: [text-only vs split with an image — see `src/components/Hero.astro`'s `visual` slot; headline + subhead + CTA count; alignment left vs center]
@@ -165,6 +175,6 @@ fonts: [
 
 ---
 
-## 9. Accessibility & performance notes
+## 10. Accessibility & performance notes
 *(anything beyond the global baseline in `~/.claude/CLAUDE.md` — most sites can leave this section as "no exceptions")*
 [e.g. specific contrast requirement, client accessibility mandate, target Lighthouse score]

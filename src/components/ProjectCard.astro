@@ -1,0 +1,28 @@
+---
+// ProjectCard.astro
+// Renders one project entry from the `projects` content collection as a
+// gallery card. Gallery images are plain URLs for now (placeholder/stock
+// images, or future Pages CMS uploads) — see the comment in
+// content.config.ts for when to switch this to astro:assets <Image>.
+
+interface Props {
+  slug: string;
+  title: string;
+  category: string;
+  description: string;
+  image: string;
+}
+
+const { slug, title, category, description, image } = Astro.props;
+---
+
+<a href={`/projects/${slug}`} class="card card-border bg-base-100 transition-shadow hover:shadow-md">
+  <figure>
+    <img src={image} alt={title} loading="lazy" class="aspect-4/3 w-full object-cover" />
+  </figure>
+  <div class="card-body">
+    <span class="badge badge-outline badge-primary w-fit">{category}</span>
+    <h3 class="card-title font-heading">{title}</h3>
+    <p class="text-base-content/70">{description}</p>
+  </div>
+</a>

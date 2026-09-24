@@ -25,6 +25,7 @@
 // a naming collision with Astro's generated font variables.
 
 import { Font } from 'astro:assets';
+import { SEO } from 'astro-seo';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
@@ -56,6 +57,8 @@ interface Props {
   phone?: string;
   socialLinks?: SocialLink[];
   lang?: string;
+  ogImage?: string;
+  noindex?: boolean;
 }
 
 const {
@@ -70,7 +73,19 @@ const {
   phone,
   socialLinks,
   lang = 'en',
+  ogImage,
+  noindex,
 } = Astro.props;
+
+const openGraph = ogImage
+  ? {
+      basic: {
+        title,
+        type: 'website',
+        image: ogImage,
+      },
+    }
+  : undefined;
 ---
 
 <!doctype html>
@@ -79,8 +94,7 @@ const {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="description" content={description} />
-    <title>{title} · {siteName}</title>
+    <SEO title={`${title} · ${siteName}`} description={description} noindex={noindex} openGraph={openGraph} />
 
     <Font cssVariable="--font-heading-family" preload />
     <Font cssVariable="--font-body-family" preload />

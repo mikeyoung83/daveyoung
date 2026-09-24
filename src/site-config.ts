@@ -10,17 +10,19 @@
 //   <BaseLayout {...siteConfig} title="Home" description="...">
 
 export const siteConfig = {
-  siteName: '[Site Name]',
+  siteName: 'Dave Young Contracting',
   navItems: [
+    { label: 'Home', href: '/' },
     { label: 'About', href: '/about' },
     { label: 'Services', href: '/services' },
+    { label: 'Projects', href: '/projects' },
     { label: 'Contact', href: '/contact' },
   ],
-  cta: { label: 'Get in touch', href: '/contact' },
-  tagline: '[One line describing what this business does]',
-  // Optional — omit any of these (or leave undefined) if not needed:
-  address: undefined as string | undefined, // '123 Main St, City, ST'
-  email: undefined as string | undefined, // 'hello@example.com'
-  phone: undefined as string | undefined, // '(555) 555-5555'
+  cta: { label: 'Get a Quote', href: '/contact' },
+  tagline: 'Residential remodels, additions & decks — Bruce Peninsula, ON.',
+  // TODO: real address/email/phone from Dave before launch.
+  address: undefined as string | undefined,
+  email: undefined as string | undefined,
+  phone: undefined as string | undefined,
   socialLinks: [] as { label: string; href: string }[],
 };

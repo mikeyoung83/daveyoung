@@ -1,0 +1,131 @@
+---
+// about.astro
+// Layout inspired by inspiration/about.png (asymmetric intro, bare stat
+// numbers, captioned project strip, stacked service rows) — adapted to
+// our actual facts rather than the inspiration's numbers, which aren't
+// ours to reuse. See STYLE-GUIDE.md section 7.
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import FooterCta from '../components/FooterCta.astro';
+import { siteConfig } from '../site-config';
+import deckPhoto from '../assets/about/deck-cottage.jpg';
+
+const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
+const featuredProjects = (await getCollection('projects'))
+  .filter((p) => p.data.featured)
+  .slice(0, 3);
+---
+
+<BaseLayout
+  {...siteConfig}
+  title="About"
+  description="Ten years of residential contracting on the Bruce Peninsula — licensed, insured, and local."
+>
+  <section class="px-4 py-16 sm:py-24 lg:px-8">
+    <div class="mx-auto grid max-w-6xl gap-10 lg:grid-cols-2 lg:items-center">
+      <div>
+        <Eyebrow text="About" />
+        <h1 class="font-heading text-4xl leading-tight font-bold sm:text-5xl">
+          Ten years on the Peninsula
+        </h1>
+
+        <div class="mt-6 max-w-prose space-y-4 text-lg text-base-content/80">
+          <p>
+            Dave Young Contracting has been doing remodels, additions, and outdoor builds on the
+            Bruce Peninsula for 10 years.
+          </p>
+          <p>
+            <!-- TODO: replace with Dave's real story/approach once supplied. -->
+            [Dave's story goes here — how he got started, his approach to a job, and what
+            homeowners can expect working with him.]
+          </p>
+        </div>
+
+        <div class="mt-8">
+          <a href="/contact" class="btn btn-primary">Get a Quote</a>
+        </div>
+      </div>
+
+      <div class="aspect-4/3 overflow-hidden rounded-box">
+        <Image
+          src={deckPhoto}
+          alt="A finished wood deck on a home on the Bruce Peninsula"
+          class="h-full w-full object-cover"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y border-base-300 bg-base-200 px-4 py-14 lg:px-8">
+    <div class="mx-auto grid max-w-6xl gap-8 sm:grid-cols-2 lg:grid-cols-4">
+      <div>
+        <div class="font-heading text-5xl font-bold text-primary">10</div>
+        <p class="mt-1 text-base-content/70">Years in business</p>
+      </div>
+      <div>
+        <div class="font-heading text-5xl font-bold text-primary">3</div>
+        <p class="mt-1 text-base-content/70">Specialties — remodels, additions, decks</p>
+      </div>
+      <div>
+        <div class="font-heading text-2xl font-bold text-primary">Bruce Peninsula</div>
+        <p class="mt-1 text-base-content/70">Based in Wiarton, ON</p>
+      </div>
+      <div>
+        <div class="font-heading text-2xl font-bold text-primary">Licensed & Insured</div>
+        <p class="mt-1 text-base-content/70">Every job, every time</p>
+      </div>
+    </div>
+  </section>
+
+  {featuredProjects.length > 0 && (
+    <section class="px-4 py-16 sm:py-24 lg:px-8">
+      <div class="mx-auto max-w-6xl">
+        <Eyebrow text="Recent work" />
+        <h2 class="font-heading text-3xl font-semibold sm:text-4xl">A look at the work</h2>
+
+        <div class="mt-8 grid gap-6 sm:grid-cols-3">
+          {featuredProjects.map((project) => (
+            <a href={`/projects/${project.id}`} class="group block">
+              <div class="aspect-4/3 overflow-hidden rounded-box">
+                <img
+                  src={project.data.gallery[0]}
+                  alt={project.data.title}
+                  loading="lazy"
+                  class="h-full w-full object-cover transition-transform group-hover:scale-105"
+                />
+              </div>
+              <p class="mt-3 font-heading text-lg font-semibold">{project.data.title}</p>
+              <p class="text-sm text-base-content/60">{project.data.category}</p>
+            </a>
+          ))}
+        </div>
+
+        <div class="mt-8">
+          <a href="/projects" class="link link-hover font-medium text-primary">
+            View all projects
+          </a>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="bg-base-200 px-4 py-16 sm:py-24 lg:px-8">
+    <div class="mx-auto max-w-6xl">
+      <Eyebrow text="How we work" />
+      <h2 class="font-heading text-3xl font-semibold sm:text-4xl">What you can expect</h2>
+
+      <div class="mt-8 divide-y divide-base-300 border-y border-base-300">
+        {services.map((service) => (
+          <div class="grid gap-2 py-6 sm:grid-cols-[1fr_2fr] sm:gap-8">
+            <h3 class="font-heading text-xl font-semibold">{service.data.title}</h3>
+            <p class="text-base-content/70">{service.data.summary}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <FooterCta />
+</BaseLayout>

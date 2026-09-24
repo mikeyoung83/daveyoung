@@ -1,0 +1,93 @@
+---
+// FooterCta.astro
+// Two-column contact CTA (text/contact-info left, form right) that sits
+// above the footer on interior pages — everything except Home (which has
+// its own dark CTA band) and Contact (which is the form's own page).
+// Layout adapted from inspiration/footer-cta.jpg; form fields reuse
+// ContactForm so every instance posts to the same Netlify form.
+import Eyebrow from './Eyebrow.astro';
+import ContactForm from './ContactForm.astro';
+import { siteConfig } from '../site-config';
+
+const { address, phone, email } = siteConfig;
+const telHref = (raw: string) => `tel:${raw.replace(/[^+\d]/g, '')}`;
+const hasContactInfo = Boolean(address || phone || email);
+---
+
+<section class="border-t border-base-300 bg-base-200 px-4 py-16 sm:py-24 lg:px-8">
+  <div class="mx-auto grid max-w-6xl gap-12 lg:grid-cols-2 lg:items-start">
+    <div>
+      <Eyebrow text="Get in touch" />
+      <h2 class="font-heading text-4xl leading-tight font-bold sm:text-5xl">
+        Have a project in mind?<br />Let's talk.
+      </h2>
+      <p class="mt-4 max-w-prose text-lg text-base-content/70">
+        Tell us what you're planning and we'll get back to you with straight answers.
+      </p>
+
+      {hasContactInfo && (
+        <ul class="mt-8 space-y-3">
+          {address && (
+            <li class="flex items-center gap-3 text-base-content/80">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 shrink-0 text-primary"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="1.5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M21 10c0 6.5-9 12-9 12s-9-5.5-9-12a9 9 0 0 1 18 0Z"
+                />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+              <span>{address}</span>
+            </li>
+          )}
+          {phone && (
+            <li class="flex items-center gap-3">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 shrink-0 text-primary"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="1.5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92Z"
+                />
+              </svg>
+              <a href={telHref(phone)} class="link link-hover">{phone}</a>
+            </li>
+          )}
+          {email && (
+            <li class="flex items-center gap-3">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 shrink-0 text-primary"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="1.5"
+              >
+                <rect x="2" y="4" width="20" height="16" rx="2" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="m2 7 10 6 10-6" />
+              </svg>
+              <a href={`mailto:${email}`} class="link link-hover">{email}</a>
+            </li>
+          )}
+        </ul>
+      )}
+    </div>
+
+    <div class="rounded-box border border-base-300 bg-base-100 p-6 sm:p-8">
+      <ContactForm />
+    </div>
+  </div>
+</section>

@@ -1,0 +1,82 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import Eyebrow from '../../components/Eyebrow.astro';
+import FooterCta from '../../components/FooterCta.astro';
+import { siteConfig } from '../../site-config';
+import { projectCategories } from '../../content.config';
+
+const projects = await getCollection('projects');
+---
+
+<BaseLayout
+  {...siteConfig}
+  title="Projects"
+  description="Completed remodels, additions, and deck & exterior projects from Dave Young Contracting on the Bruce Peninsula."
+>
+  <section class="px-4 py-16 sm:py-24 lg:px-8">
+    <div class="mx-auto max-w-6xl">
+      <div class="max-w-2xl">
+        <Eyebrow text="Projects" />
+        <h1 class="font-heading text-4xl font-semibold leading-tight sm:text-5xl">
+          See the work
+        </h1>
+        <p class="mt-4 max-w-prose text-lg text-base-content/70">
+          A look at finished work around the Bruce Peninsula. Filter by category, or browse it
+          all.
+        </p>
+      </div>
+
+      <form class="filter mt-8">
+        <input class="btn btn-square" type="reset" value="×" />
+        {projectCategories.map((category) => (
+          <input
+            class="btn"
+            type="radio"
+            name="project-category"
+            aria-label={category}
+            data-category={category}
+          />
+        ))}
+      </form>
+
+      <div id="project-grid" class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {projects.map((project) => (
+          <div data-category={project.data.category}>
+            <ProjectCard
+              slug={project.id}
+              title={project.data.title}
+              category={project.data.category}
+              description={project.data.description}
+              image={project.data.gallery[0]}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <FooterCta />
+
+  <script>
+    const form = document.querySelector<HTMLFormElement>('.filter');
+    const cards = document.querySelectorAll<HTMLElement>('#project-grid [data-category]');
+
+    const applyFilter = (category: string | undefined) => {
+      cards.forEach((card) => {
+        card.hidden = Boolean(category) && card.dataset.category !== category;
+      });
+    };
+
+    form?.addEventListener('change', () => {
+      const selected = form.querySelector<HTMLInputElement>('input[type="radio"]:checked');
+      applyFilter(selected?.dataset.category);
+    });
+
+    form?.addEventListener('reset', () => {
+      // Reset fires before radios actually clear, so wait a tick.
+      requestAnimationFrame(() => applyFilter(undefined));
+    });
+  </script>
+</BaseLayout>

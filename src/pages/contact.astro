@@ -1,0 +1,29 @@
+---
+// contact.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { siteConfig } from '../site-config';
+---
+
+<BaseLayout
+  {...siteConfig}
+  title="Contact"
+  description="Get a quote from Dave Young Contracting — serving the Bruce Peninsula, ON."
+>
+  <section class="px-4 py-16 sm:py-24 lg:px-8">
+    <div class="mx-auto max-w-2xl">
+      <Eyebrow text="Contact" />
+      <h1 class="font-heading text-4xl font-semibold leading-tight sm:text-5xl">
+        Let's talk about your project
+      </h1>
+      <p class="mt-4 max-w-prose text-lg text-base-content/70">
+        Tell us about the job and we'll get back to you.
+      </p>
+
+      <div class="mt-10">
+        <ContactForm />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
