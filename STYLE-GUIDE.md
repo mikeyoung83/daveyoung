@@ -174,6 +174,7 @@ Services are code-managed, not CMS-editable.
 
 ## 9. Components & patterns
 
+- **Logo & favicon**: stacked SVG logo (house mark + "DAVE YOUNG" + "RENOVATIONS") at `src/assets/logo/dave-young-renovations-logo.svg`, set as `logo` in `site-config.ts`; shown in the header at 48px (mobile) / 56px (desktop) tall. Favicon: `public/favicon.svg` (rust tile + house mark), plus generated `favicon-32.png` and full-bleed `apple-touch-icon.png`.
 - **Navbar**: static, solid `base-100` with a hairline bottom border. Active link is primary-colored text only — no pill background or shadow. Desktop: brand left, centered links, "Get a Quote" right. Mobile: brand left, hamburger right, opening a full-screen `<dialog>` menu with large heading-font links that slides down and fades in.
 - **Hero**: home uses a full-bleed photo (`<Picture>`, eager/high priority) under a dark neutral gradient overlay; left-aligned, eyebrow + oversized H1 + subhead + two CTAs. Interior pages open with a plain eyebrow + H1 section.
 - **Cards**: `card-border` on `base-100` with a soft warm shadow; linked cards lift on hover. Service cards inset the photo inside the card border.

@@ -9,8 +9,13 @@
 //   ---
 //   <BaseLayout {...siteConfig} title="Home" description="...">
 
+import logo from './assets/logo/dave-young-renovations-logo.svg';
+
 export const siteConfig = {
   siteName: 'Dave Young Renovations',
+  // Header logo (includes the business name, so the navbar shows it
+  // instead of the text name). Omit to fall back to text.
+  logo,
   navItems: [
     { label: 'Home', href: '/' },
     { label: 'About', href: '/about' },

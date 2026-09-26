@@ -10,6 +10,12 @@
 // mx-auto max-w-6xl with no padding of its own — matching the
 // section > mx-auto max-w-6xl div pattern used on every page, so the
 // logo/links line up exactly with the page content below.
+//
+// Brand: pass `logo` (an SVG/image import) to show it instead of the text
+// name — it should include the name, which becomes its alt text.
+
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 
 interface NavItem {
   label: string;
@@ -23,11 +29,12 @@ interface CTA {
 
 interface Props {
   siteName: string;
+  logo?: ImageMetadata;
   navItems: NavItem[];
   cta?: CTA;
 }
 
-const { siteName, navItems, cta } = Astro.props;
+const { siteName, logo, navItems, cta } = Astro.props;
 const currentPath = Astro.url.pathname;
 ---
 
@@ -36,8 +43,12 @@ const currentPath = Astro.url.pathname;
     {/* navbar-start is 50% wide by default; on mobile nothing sits in the
         center, so let it grow or the brand wraps onto two lines. */}
     <div class="navbar-start w-auto flex-1 lg:w-1/2 lg:flex-none">
-      <a href="/" class="font-heading text-lg font-semibold whitespace-nowrap">
-        {siteName}
+      <a href="/" class={logo ? 'block' : 'font-heading text-lg font-semibold whitespace-nowrap'}>
+        {logo ? (
+          <Image src={logo} alt={siteName} loading="eager" class="h-12 w-auto lg:h-14" />
+        ) : (
+          siteName
+        )}
       </a>
     </div>
 
@@ -101,8 +112,12 @@ const currentPath = Astro.url.pathname;
       <div class="border-b border-base-200 px-4">
         <div class="navbar mx-auto max-w-6xl">
           <div class="flex-1">
-            <a href="/" class="font-heading text-lg font-semibold whitespace-nowrap">
-              {siteName}
+            <a href="/" class={logo ? 'block' : 'font-heading text-lg font-semibold whitespace-nowrap'}>
+              {logo ? (
+                <Image src={logo} alt={siteName} loading="eager" class="h-12 w-auto lg:h-14" />
+              ) : (
+                siteName
+              )}
             </a>
           </div>
           <form method="dialog">

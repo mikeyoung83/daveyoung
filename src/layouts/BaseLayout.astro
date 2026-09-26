@@ -25,6 +25,7 @@
 // a naming collision with Astro's generated font variables.
 
 import { Font } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import { SEO } from 'astro-seo';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
@@ -49,6 +50,7 @@ interface Props {
   title: string;
   description: string;
   siteName: string;
+  logo?: ImageMetadata;
   navItems: NavItem[];
   cta?: CTA;
   tagline?: string;
@@ -65,6 +67,7 @@ const {
   title,
   description,
   siteName,
+  logo,
   navItems,
   cta,
   tagline,
@@ -93,7 +96,11 @@ const openGraph = ogImage
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {/* SVG for modern browsers, PNG fallback, and a full-bleed 180px icon
+        for iOS home screens (iOS rounds the corners itself). */}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <SEO title={`${title} · ${siteName}`} description={description} noindex={noindex} openGraph={openGraph} />
 
     <Font cssVariable="--font-heading-family" preload />
@@ -107,7 +114,7 @@ const openGraph = ogImage
       Skip to content
     </a>
 
-    <Navbar siteName={siteName} navItems={navItems} cta={cta} />
+    <Navbar siteName={siteName} logo={logo} navItems={navItems} cta={cta} />
 
     {/* flex column so a short page's last section can take flex-1 and
         stretch to the footer — its background/texture then fills the
